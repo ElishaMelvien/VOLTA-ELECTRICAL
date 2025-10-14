@@ -4435,7 +4435,7 @@ section,
   /* Add your styles here */
 }
 
-.logo {
+/* .logo {
     height: auto !important;
     padding: 10px 0;
 }
@@ -4452,4 +4452,70 @@ section,
     .logo-img {
         width: 200px !important;
     }
+} */
+
+/* logo dark mode */
+/* @media (max-width: 768px) {
+    .logo-img {
+        width: 100px !important;
+    }
+
+    .sitename {
+        font-size: 1rem;
+    }
+
+    header .logo {
+        gap: 0.5rem;
+    }
+} */
+/* End logo dark mode */
+
+
+/*--------------------------------------------------------------
+/* Header fix */
+header.header {
+    height: auto;
+    padding: 10px 15px;
 }
+
+.logo-img {
+    width: 120px !important;
+    height: auto !important;
+    max-height: none !important;
+    object-fit: contain;
+    filter: brightness(100%) contrast(100%);
+    
+}
+
+@media (max-width: 768px) {
+    .logo-img {
+        width: 100px !important;
+    }
+
+    .sitename {
+        font-size: 1rem;
+    }
+
+    .hero {
+        padding-top: 120px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-img {
+        width: 80px !important;
+    }
+
+    .hero h1 {
+        font-size: 1.6rem;
+    }
+}
+
