@@ -4536,3 +4536,24 @@ header.header {
   color: var(--contrast-color);
   background: color-mix(in srgb, var(--accent-color), transparent 15%);
 }
+
+/* Add this new CSS rule for buttons outside the header */
+.btn-getstarted {
+  display: inline-block;
+  color: var(--contrast-color);
+  background: var(--accent-color);
+  font-size: 14px;
+  padding: 8px 25px;
+  margin: 0 0 0 30px;
+  border-radius: 4px;
+  transition: 0.3s;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-getstarted:hover,
+.btn-getstarted:focus {
+  color: var(--contrast-color);
+  background: color-mix(in srgb, var(--accent-color), transparent 15%);
+}
