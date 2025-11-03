@@ -49,7 +49,7 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
       <!-- <a class="btn-getstarted d-none d-sm-block" href="https://wa.me/260978195399?text=Hello%20VoltaElectrical,%20I%20need%20help%20with%20my%20electrical%20project.">WhatsApp Us</a> -->
-      <a class="btn-getstarted d-none d-sm-block" href="quote.html">Request Quote</a>
+      <a class="btn-getstarted d-none d-sm-block" href="quote.html">Get a free Quote</a>
 
     </div>
   </header>
@@ -76,12 +76,12 @@
               <p data-aos="fade-up" data-aos-delay="300">
                 Professional Electricians you can trust for <strong>House Wiring, Warehouse Wiring, Lodge Wiring, Geyser Installations, Solar and Backup Power Installation, Home Automation. </strong> 
                   We  are also specialized in Maintenance and troubleshooting, CCTV </strong> security installations to keep your property powered and protected.  
-                  <a href="quote.html" class="submit-btn">Get a free quotation today!</a></strong>
+                  <a href="quote.html" class="submit-btn">Get a free Quote!</a></strong>
               </p>
               
               <div class="hero-actions" data-aos="fade-up" data-aos-delay="400">
                 <a href="projects.html" class="btn btn-secondary">View Projects</a>
-                <a class="btn btn-primary" href="https://wa.me/260978195399?text=Hello%20VoltaElectrical,%20I%20need%20help%20with%20my%20electrical%20project.">
+                <a class="btn btn-primary" href="https://wa.me/260978195399?text=Hi%20Volta Electrical,%20I%20would%20like a%20quote%20for house wiring.">
                   <i class="bi bi-whatsapp"></i> WhatsApp Us
                 </a>
               </div>
@@ -172,8 +172,8 @@
             <div class="content">
               <h2 class="section-heading mb-4">Solar Installation & Backup Power</h2>
               <p class="lead-text mb-4">Experience uninterrupted power with our professional solar solutions.</p>
-              <a class="btn-getstarted " href="quote.html">
-                <i class="bi bi-file-earmark-pdf me-2"></i>Request Quote</a>
+              <!--<a class="btn-getstarted " href="quote.html">
+                <i class="bi bi-file-earmark-pdf me-2"></i>Get a free Quote</a>-->
               <div class="divider my-4"></div>
               <div class="cta-section" data-aos="fade-up" data-aos-delay="450">
                 <a href="#services" class="cta-link">
@@ -219,12 +219,10 @@
               <i class="bi bi-tools"></i>
             </div>
             <h3>Maintenance & Troubleshooting</h3>
-            <p>
-              Quick and reliable fault finding, repairs, and routine maintenance. 
-              From tripping circuits to faulty wiring, we restore safety and 
-              keep your systems running smoothly
-            </p>
-            <a href="service-details.html" class="service-cta">
+           
+            <p>Flickering lights. It’s a common household annoyance, often dismissed as a minor inconvenience. But persistent or worsening flickering can signal underlying electrical issues that shouldn’t be ignored.</p>
+            <img src="assets/img/construction/bulbs.jpg" alt="Construction project showcase" class="img-fluid">
+            <a href="services.html" class="service-cta">
               <span>View Services Gallery</span>
               <i class="bi bi-arrow-right"></i>
             </a>
@@ -241,8 +239,10 @@
               precision and safety. Power your home with modern, efficient 
               electrical systems built to last.
             </p>
+            <img src="assets/img/construction/db-3.jpeg" alt="Construction project showcase" class="img-fluid">
+
             
-            <a href="service-details.html" class="service-cta">
+            <a href="projects.html" class="service-cta">
               <span>View Gallery</span>
               <i class="bi bi-arrow-right"></i>
             </a>
@@ -257,8 +257,8 @@
             <p>
               Reduce power cuts with professional solar installations, 
               inverter systems, and energy-efficient solutions. 
-              Tailored to homes, offices, and lodges for reliable backup power.
             </p>
+                <img src="assets/img/construction/solar backup2.webp" alt="Backup power" class="img-fluid">
             <a href="quote.html">
               <span>Get Quote</span>
               <i class="bi bi-arrow-right"></i>
@@ -276,6 +276,7 @@
               to floodlights and outdoor security lighting. 
               Enhance safety and add beauty to your property.
             </p>
+            <img src="assets/img/construction/shad-1.webp" alt="shadelier" class="img-fluid">
             <a href="service-details.html" class="service-cta">
               <span>Explore Service</span>
               <i class="bi bi-arrow-right"></i>
@@ -748,7 +749,7 @@
 
                   <div class="action-buttons">
                     <a href="quote.html" class="btn-primary">
-                      <span>Request Quote</span>
+                      <span>Get a free Quote</span>
                       <i class="bi bi-arrow-right"></i>
                     </a>
                     <a href="#portfolio" class="btn-secondary">
@@ -762,8 +763,7 @@
                   <div class="contact-row">
                     <i class="bi bi-telephone-fill"></i>
                     <div class="contact-details">
-                      <span class="contact-label">Direct Line</span>
-                      <span class="contact-value">0978195399</span>
+                      <span class="contact-label"><a href="tel:+260978195399" id="call-btn">Call Us 0978195399</a></span>
                     </div>
                   </div>
 
@@ -886,6 +886,18 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <!-- Floating Call Button -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const btn = document.getElementById("floating-call");
+      function toggleButton() {
+        btn.style.display = window.innerWidth < 992 ? "flex" : "none";
+      }
+      toggleButton();
+      window.addEventListener("resize", toggleButton);
+    });
+  </script>
 
 </body>
 </html>
