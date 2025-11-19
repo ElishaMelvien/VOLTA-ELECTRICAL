@@ -4557,3 +4557,419 @@ header.header {
   color: var(--contrast-color);
   background: color-mix(in srgb, var(--accent-color), transparent 15%);
 }
+
+.solar-modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.8);
+      animation: fadeIn 0.3s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .solar-modal.active {
+      display: block;
+    }
+
+    .solar-modal-content {
+      background: white;
+      margin: 2% auto;
+      width: 95%;
+      max-width: 1000px;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      animation: slideDown 0.4s;
+      max-height: 95vh;
+      overflow-y: auto;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .solar-close {
+      color: white;
+      float: right;
+      font-size: 35px;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 0 20px;
+      line-height: 1;
+      transition: transform 0.2s;
+    }
+
+    .solar-close:hover {
+      transform: rotate(90deg);
+    }
+
+    .solar-header {
+      /* background: linear-gradient(135deg, #f46404 0%, #6902cf 100%); */
+      background: #f46404;
+      color: white;
+      padding: 30px;
+      /* border-radius: 20px 20px 0 0; */
+      position: relative;
+    }
+
+    .solar-header h2 {
+      margin: 0;
+      font-size: 2em;
+      color: white;
+    }
+
+    .solar-header p {
+      margin: 10px 0 0 0;
+      opacity: 0.95;
+    }
+
+    .instant-quote-btn {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.95em;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 15px 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s;
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+
+      width: 100%;  
+      justify-content: center;
+    }
+
+    .instant-quote-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.5);
+    }
+
+    .instant-quote-btn i {
+      font-size: 1.2em;
+    }
+
+    .solar-form-section {
+      padding: 40px 30px;
+    }
+
+    .solar-form-group {
+      margin-bottom: 25px;
+    }
+
+    .solar-form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .solar-form-group input,
+    .solar-form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1em;
+      transition: border-color 0.3s;
+    }
+
+    .solar-form-group input:focus,
+    .solar-form-group select:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .system-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .system-card {
+      border: 3px solid #e0e0e0;
+      border-radius: 12px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-align: center;
+    }
+
+    .system-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+    }
+
+    .system-card.selected {
+      border-color: #667eea;
+      background: linear-gradient(135deg, #667eea10 0%, #764ba210 100%);
+    }
+
+    .system-card h4 {
+      color: #667eea;
+      margin-bottom: 8px;
+      font-size: 1.3em;
+    }
+
+    .system-card p {
+      color: #666;
+      font-size: 0.9em;
+      line-height: 1.5;
+      margin: 5px 0;
+    }
+
+    .system-card strong {
+      color: #333;
+      font-size: 1.1em;
+    }
+
+    .solar-btn {
+      /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+      background: var(--accent-color);
+      color: white;
+      padding: 10px 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1em;
+      font-weight: 600;
+      cursor: pointer;
+      width: 30%;
+      transition: all 0.3s;
+      display: block;
+      margin: auto;
+    }
+
+    @media (max-width: 768px) {
+      .solar-btn {
+        width: 98%;
+        margin: 1% auto;
+      }
+    }
+
+    .solar-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--nav-hover-color);
+    }
+
+    .quote-result {
+      display: none;
+      background: #f8f9fa;
+      padding: 30px;
+      border-top: 3px solid #667eea;
+    }
+
+    .quote-result.show {
+      display: block;
+    }
+
+    .quote-result h3 {
+      color: #667eea;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 1.8em;
+    }
+
+    .client-info,
+    .line-items,
+    .notes-box {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .info-row:last-child {
+      border-bottom: none;
+    }
+
+    .info-label {
+      font-weight: 600;
+      color: #666;
+    }
+
+    .line-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .line-item:last-child {
+      border-bottom: none;
+    }
+
+    .item-name {
+      font-weight: 500;
+      color: #333;
+    }
+
+    .item-price {
+      font-weight: 600;
+      color: #667eea;
+    }
+
+    .total-box {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 25px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+    }
+
+    .total-row.grand {
+      border-top: 2px solid rgba(255,255,255,0.3);
+      margin-top: 15px;
+      padding-top: 15px;
+      font-size: 1.4em;
+      font-weight: 700;
+    }
+
+    .action-btns {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .btn-print {
+      background: #6c757d;
+    }
+
+    .btn-whatsapp {
+      background: #25D366;
+    }
+
+    .btn-new {
+      background: #667eea;
+    }
+
+    .notes-box h4 {
+      color: #667eea;
+      margin-bottom: 15px;
+    }
+
+    .notes-box ul {
+      list-style-position: inside;
+      color: #666;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 768px) {
+      .solar-modal-content {
+        width: 98%;
+        margin: 1% auto;
+      }
+
+      .system-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .action-btns {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .system-card {
+  border: 3px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.system-card .check-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  background: #667eea;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2em;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s;
+}
+
+.system-card.selected .check-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.selected-package-display {
+  margin-top: 20px;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+  border-left: 4px solid #667eea;
+  border-radius: 8px;
+  display: none;
+  animation: slideIn 0.3s;
+}
+
+.selected-package-display.show {
+  display: block;
+}
+
+.selected-package-display h5 {
+  color: #667eea;
+  margin: 0 0 10px 0;
+  font-size: 1.1em;
+}
+
+.selected-package-display p {
+  margin: 5px 0;
+  color: #333;
+}
+
+.selected-package-display .package-price {
+  font-size: 1.4em;
+  font-weight: 700;
+  color: #667eea;
+  margin-top: 10px;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

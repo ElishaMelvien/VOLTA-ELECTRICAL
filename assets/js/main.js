@@ -136,3 +136,176 @@
   window.addEventListener("load", initSwiper);
 
 })();
+
+// ============ solar quote modal ====================
+const systemPrices = {
+      basic: {
+        name: '2kW Basic Solar System',
+        price: 18500,
+        components: [
+          { name: '2kW Solar Panels (4x 500W)', price: 5200 },
+          { name: '2kW Hybrid Inverter', price: 4800 },
+          { name: 'Lithium Battery 5kWh', price: 6500 },
+          { name: 'Mounting & Cabling', price: 2000 }
+        ]
+      },
+      standard: {
+        name: '3.5kW Standard Solar System',
+        price: 28900,
+        components: [
+          { name: '3.5kW Solar Panels (7x 500W)', price: 8900 },
+          { name: '3.5kW Hybrid Inverter', price: 7500 },
+          { name: 'Lithium Battery 10kWh', price: 10200 },
+          { name: 'Mounting & Cabling', price: 2300 }
+        ]
+      },
+      premium: {
+        name: '5kW Premium Solar System',
+        price: 42500,
+        components: [
+          { name: '5kW Solar Panels (10x 500W)', price: 12500 },
+          { name: '5kW Hybrid Inverter', price: 11000 },
+          { name: 'Lithium Battery 15kWh', price: 15500 },
+          { name: 'Mounting & Advanced Cabling', price: 3500 }
+        ]
+      }
+    };
+
+    const additionalPrices = {
+      geyser: { name: 'Geyser Installation (150L)', price: 3500 },
+      cctv: { name: 'CCTV System (4 Cameras + DVR)', price: 4800 },
+      automation: { name: 'Home Automation System', price: 6200 },
+      surge: { name: 'Surge Protection Upgrade', price: 1800 }
+    };
+
+    function openSolarModal() {
+      document.getElementById('solarModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSolarModal() {
+      document.getElementById('solarModal').classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    function resetQuote() {
+      document.getElementById('solarQuoteForm').reset();
+      document.querySelectorAll('.system-card').forEach(c => c.classList.remove('selected'));
+      document.getElementById('quoteResult').classList.remove('show');
+      document.getElementById('solarQuoteForm').style.display = 'block';
+    }
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+      const modal = document.getElementById('solarModal');
+      if (event.target === modal) {
+        closeSolarModal();
+      }
+    }
+
+    // System card selection
+    document.querySelectorAll('.system-card').forEach(card => {
+      card.addEventListener('click', function() {
+        document.querySelectorAll('.system-card').forEach(c => c.classList.remove('selected'));
+        this.classList.add('selected');
+        document.getElementById('systemType').value = this.dataset.system;
+      });
+    });
+
+    // Form submission
+    document.getElementById('solarQuoteForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const systemType = document.getElementById('systemType').value;
+      if (!systemType) {
+        alert('Please select a solar system size');
+        return;
+      }
+
+      // Generate quote reference
+      const quoteRef = 'VE-' + Date.now().toString().slice(-8);
+      const today = new Date().toLocaleDateString('en-GB');
+
+      // Display client info
+      document.getElementById('quoteRef').textContent = quoteRef;
+      document.getElementById('quoteDate').textContent = today;
+      document.getElementById('displayName').textContent = document.getElementById('solarName').value;
+      document.getElementById('displayPhone').textContent = document.getElementById('solarPhone').value;
+      document.getElementById('displayEmail').textContent = document.getElementById('solarEmail').value || 'N/A';
+      document.getElementById('displayLocation').textContent = document.getElementById('solarLocation').value;
+
+      // Build line items
+      const system = systemPrices[systemType];
+      let lineItemsHtml = '';
+      let subtotal = 0;
+
+      // Add system components
+      system.components.forEach(comp => {
+        lineItemsHtml += `
+          <div class="line-item">
+            <span class="item-name">${comp.name}</span>
+            <span class="item-price">K${comp.price.toLocaleString()}</span>
+          </div>
+        `;
+        subtotal += comp.price;
+      });
+
+      // Add additional services
+      const selectedServices = Array.from(document.getElementById('additionalServices').selectedOptions);
+      selectedServices.forEach(option => {
+        const service = additionalPrices[option.value];
+        lineItemsHtml += `
+          <div class="line-item">
+            <span class="item-name">${service.name}</span>
+            <span class="item-price">K${service.price.toLocaleString()}</span>
+          </div>
+        `;
+        subtotal += service.price;
+      });
+
+      document.getElementById('lineItemsList').innerHTML = lineItemsHtml;
+
+      // Calculate totals
+      const installation = Math.round(subtotal * 0.15);
+      const vat = Math.round((subtotal + installation) * 0.16);
+      const grandTotal = subtotal + installation + vat;
+
+      document.getElementById('subtotal').textContent = 'K' + subtotal.toLocaleString();
+      document.getElementById('installation').textContent = 'K' + installation.toLocaleString();
+      document.getElementById('vat').textContent = 'K' + vat.toLocaleString();
+      document.getElementById('grandTotal').textContent = 'K' + grandTotal.toLocaleString();
+
+      // WhatsApp message
+      const whatsappMsg = `Hello VoltaElectrical! I received quote ${quoteRef} for ${system.name}. Total: K${grandTotal.toLocaleString()}. Name: ${document.getElementById('solarName').value}, Location: ${document.getElementById('solarLocation').value}. I'd like to proceed.`;
+      document.getElementById('whatsappBtn').onclick = function() {
+        window.open(`https://wa.me/260978195399?text=${encodeURIComponent(whatsappMsg)}`, '_blank');
+      };
+
+      // Show quotation and hide form
+      document.getElementById('solarQuoteForm').style.display = 'none';
+      document.getElementById('quoteResult').classList.add('show');
+      document.getElementById('quoteResult').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    // ============== end solar quote modal ====================
+    // System card selection
+document.querySelectorAll('.system-card').forEach(card => {
+  card.addEventListener('click', function() {
+    document.querySelectorAll('.system-card').forEach(c => c.classList.remove('selected'));
+    this.classList.add('selected');
+    const systemType = this.dataset.system;
+    document.getElementById('systemType').value = systemType;
+    
+    // Show selected package details
+    const system = systemPrices[systemType];
+    const displayDiv = document.getElementById('selectedPackage');
+    displayDiv.innerHTML = `
+      <h5>✓ Selected Package: ${system.name}</h5>
+      <p><strong>Includes:</strong></p>
+      <ul style="margin: 10px 0; padding-left: 20px;">
+        ${system.components.map(comp => `<li>${comp.name}</li>`).join('')}
+      </ul>
+      <div class="package-price">K${system.price.toLocaleString()}</div>
+    `;
+    displayDiv.classList.add('show');
+  });
+});
