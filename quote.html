@@ -265,37 +265,26 @@
             <div class="system-cards">
               <div class="system-card" data-system="basic">
                 <div class="check-icon">✓</div>
-                <h4>2kW Basic</h4>
-                <p>Small homes<br>Lights, TV, Fridge</p>
+                <h4>2.5kVA Basic</h4>
+                <p>Small homes<br>Lights, Hometheater TV, small Fridge</p>
                 <strong>K18,500</strong>
               </div>
               <div class="system-card" data-system="standard">
                 <div class="check-icon">✓</div>
-                <h4>3.5kW Standard</h4>
-                <p>Medium homes<br>+ Washing Machine</p>
+                <h4>3.5kVA Standard</h4>
+                <p>Medium homes<br>Lights, TV Laptops, Fridge + 0.75HP water pump</p>
                 <strong>K28,900</strong>
               </div>
               <div class="system-card" data-system="premium">
                 <div class="check-icon">✓</div>
-                <h4>5kW Premium</h4>
-                <p>Full home backup<br>All appliances</p>
+                <h4>6kVA Premium</h4>
+                <p>Full home backup<br>3 Fridges, Lights, TV, Laptops, Hometheaster system + 1.75HP water pump</p>
                 <strong>K42,500</strong>
               </div>
             </div>
             <input type="hidden" id="systemType" required>
             <div id="selectedPackage" class="selected-package-display"></div>
           </div>
-
-          <div class="solar-form-group">
-            <label>Additional Services (Optional - Hold Ctrl/Cmd to select multiple)</label>
-            <select id="additionalServices" multiple size="4">
-              <option value="geyser">Geyser Installation (K1,500)</option>
-              <option value="cctv">CCTV Installation - 8 Cameras (K4,800)</option>
-              <option value="automation">Home Automation System (K6,200)</option>
-              <option value="surge">Surge Protection Upgrade (K1,000)</option>
-            </select>
-          </div>
-
           <button type="submit" class="solar-btn">Generate My Quote</button>
         </form>
 
@@ -339,10 +328,10 @@
               <span>Installation & Labor:</span>
               <span id="installation">K0.00</span>
             </div>
-            <div class="total-row">
+            <!--<div class="total-row">
               <span>VAT (16%):</span>
               <span id="vat">K0.00</span>
-            </div>
+            </div>-->
             <div class="total-row grand">
               <span>GRAND TOTAL:</span>
               <span id="grandTotal">K0.00</span>
@@ -366,7 +355,7 @@
               <i class="bi bi-printer"></i> Print Quote
             </button>
             <button class="solar-btn btn-whatsapp" id="whatsappBtn">
-              <i class="bi bi-whatsapp"></i> Send via WhatsApp
+              <i class="bi bi-whatsapp"></i> Request for a detailed quote
             </button>
             <button class="solar-btn btn-new" onclick="resetQuote()">
               <i class="bi bi-arrow-clockwise"></i> New Quote
@@ -476,159 +465,5 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
-
-  <!-- Solar Quote Calculator Script -->
-  <script>
-    const systemPrices = {
-      basic: {
-        name: '2kW Basic Solar System',
-        price: 18500,
-        components: [
-          { name: '2kW Solar Panels (4x 500W)', price: 5200 },
-          { name: '2kW Hybrid Inverter', price: 4800 },
-          { name: 'Lithium Battery 5kWh', price: 6500 },
-          { name: 'Mounting & Cabling', price: 2000 }
-        ]
-      },
-      standard: {
-        name: '3.5kW Standard Solar System',
-        price: 28900,
-        components: [
-          { name: '3.5kW Solar Panels (7x 500W)', price: 8900 },
-          { name: '3.5kW Hybrid Inverter', price: 7500 },
-          { name: 'Lithium Battery 10kWh', price: 10200 },
-          { name: 'Mounting & Cabling', price: 2300 }
-        ]
-      },
-      premium: {
-        name: '5kW Premium Solar System',
-        price: 42500,
-        components: [
-          { name: '5kW Solar Panels (10x 500W)', price: 12500 },
-          { name: '5kW Hybrid Inverter', price: 11000 },
-          { name: 'Lithium Battery 15kWh', price: 15500 },
-          { name: 'Mounting & Advanced Cabling', price: 3500 }
-        ]
-      }
-    };
-
-    const additionalPrices = {
-      geyser: { name: 'Geyser Installation (150L)', price: 3500 },
-      cctv: { name: 'CCTV System (4 Cameras + DVR)', price: 4800 },
-      automation: { name: 'Home Automation System', price: 6200 },
-      surge: { name: 'Surge Protection Upgrade', price: 1800 }
-    };
-
-    function openSolarModal() {
-      document.getElementById('solarModal').classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeSolarModal() {
-      document.getElementById('solarModal').classList.remove('active');
-      document.body.style.overflow = 'auto';
-    }
-
-    function resetQuote() {
-      document.getElementById('solarQuoteForm').reset();
-      document.querySelectorAll('.system-card').forEach(c => c.classList.remove('selected'));
-      document.getElementById('quoteResult').classList.remove('show');
-      document.getElementById('solarQuoteForm').style.display = 'block';
-    }
-
-    // Close modal when clicking outside
-    window.onclick = function(event) {
-      const modal = document.getElementById('solarModal');
-      if (event.target === modal) {
-        closeSolarModal();
-      }
-    }
-
-    // System card selection
-    document.querySelectorAll('.system-card').forEach(card => {
-      card.addEventListener('click', function() {
-        document.querySelectorAll('.system-card').forEach(c => c.classList.remove('selected'));
-        this.classList.add('selected');
-        document.getElementById('systemType').value = this.dataset.system;
-      });
-    });
-
-    // Form submission
-    document.getElementById('solarQuoteForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const systemType = document.getElementById('systemType').value;
-      if (!systemType) {
-        alert('Please select a solar system size');
-        return;
-      }
-
-      // Generate quote reference
-      const quoteRef = 'VE-' + Date.now().toString().slice(-8);
-      const today = new Date().toLocaleDateString('en-GB');
-
-      // Display client info
-      document.getElementById('quoteRef').textContent = quoteRef;
-      document.getElementById('quoteDate').textContent = today;
-      document.getElementById('displayName').textContent = document.getElementById('solarName').value;
-      document.getElementById('displayPhone').textContent = document.getElementById('solarPhone').value;
-      document.getElementById('displayEmail').textContent = document.getElementById('solarEmail').value || 'N/A';
-      document.getElementById('displayLocation').textContent = document.getElementById('solarLocation').value;
-
-      // Build line items
-      const system = systemPrices[systemType];
-      let lineItemsHtml = '';
-      let subtotal = 0;
-
-      // Add system components
-      system.components.forEach(comp => {
-        lineItemsHtml += `
-          <div class="line-item">
-            <span class="item-name">${comp.name}</span>
-            <span class="item-price">K${comp.price.toLocaleString()}</span>
-          </div>
-        `;
-        subtotal += comp.price;
-      });
-
-      // Add additional services
-      const selectedServices = Array.from(document.getElementById('additionalServices').selectedOptions);
-      selectedServices.forEach(option => {
-        const service = additionalPrices[option.value];
-        lineItemsHtml += `
-          <div class="line-item">
-            <span class="item-name">${service.name}</span>
-            <span class="item-price">K${service.price.toLocaleString()}</span>
-          </div>
-        `;
-        subtotal += service.price;
-      });
-
-      document.getElementById('lineItemsList').innerHTML = lineItemsHtml;
-
-      // Calculate totals
-      const installation = Math.round(subtotal * 0.15);
-      const vat = Math.round((subtotal + installation) * 0.16);
-      const grandTotal = subtotal + installation + vat;
-
-      document.getElementById('subtotal').textContent = 'K' + subtotal.toLocaleString();
-      document.getElementById('installation').textContent = 'K' + installation.toLocaleString();
-      document.getElementById('vat').textContent = 'K' + vat.toLocaleString();
-      document.getElementById('grandTotal').textContent = 'K' + grandTotal.toLocaleString();
-
-      // WhatsApp message
-      const whatsappMsg = `Hello VoltaElectrical! I received quote ${quoteRef} for ${system.name}. Total: K${grandTotal.toLocaleString()}. Name: ${document.getElementById('solarName').value}, Location: ${document.getElementById('solarLocation').value}. I'd like to proceed.`;
-      document.getElementById('whatsappBtn').onclick = function() {
-        window.open(`https://wa.me/260978195399?text=${encodeURIComponent(whatsappMsg)}`, '_blank');
-      };
-
-      // Show quotation and hide form
-      document.getElementById('solarQuoteForm').style.display = 'none';
-      document.getElementById('quoteResult').classList.add('show');
-      document.getElementById('quoteResult').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  </script>
-
 </body>
-
 </html>

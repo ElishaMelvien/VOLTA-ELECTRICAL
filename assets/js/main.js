@@ -140,27 +140,28 @@
 // ============ solar quote modal ====================
 const systemPrices = {
       basic: {
-        name: '2kW Basic Solar System',
+        name: '2.5KVA Basic Solar System',
         price: 18500,
         components: [
           { name: '2kW Solar Panels (4x 500W)', price: 5200 },
           { name: '2kW Hybrid Inverter', price: 4800 },
-          { name: 'Lithium Battery 5kWh', price: 6500 },
-          { name: 'Mounting & Cabling', price: 2000 }
+          { name: 'Lithium Battery 3kWh', price: 6500 },
+          { name: 'Mounting & Cabling Exclusive', price: 2000 }
         ]
       },
       standard: {
-        name: '3.5kW Standard Solar System',
+        name: '3.5kVA Standard Solar System',
         price: 28900,
         components: [
-          { name: '3.5kW Solar Panels (7x 500W)', price: 8900 },
+          { name: '5 x 585W Solar Panels', price: 2925},
           { name: '3.5kW Hybrid Inverter', price: 7500 },
-          { name: 'Lithium Battery 10kWh', price: 10200 },
-          { name: 'Mounting & Cabling', price: 2300 }
+          { name: '10kWh 25.6v 150AH Lithium Battery ', price: 10200 },
+          { name: 'Mounting Kit', price: 2300 },
+          { name: 'Protection Kit', price: 2300 }
         ]
       },
       premium: {
-        name: '5kW Premium Solar System',
+        name: '6kVA Premium Solar System',
         price: 42500,
         components: [
           { name: '5kW Solar Panels (10x 500W)', price: 12500 },
@@ -250,33 +251,19 @@ const systemPrices = {
         subtotal += comp.price;
       });
 
-      // Add additional services
-      const selectedServices = Array.from(document.getElementById('additionalServices').selectedOptions);
-      selectedServices.forEach(option => {
-        const service = additionalPrices[option.value];
-        lineItemsHtml += `
-          <div class="line-item">
-            <span class="item-name">${service.name}</span>
-            <span class="item-price">K${service.price.toLocaleString()}</span>
-          </div>
-        `;
-        subtotal += service.price;
-      });
-
       document.getElementById('lineItemsList').innerHTML = lineItemsHtml;
 
       // Calculate totals
-      const installation = Math.round(subtotal * 0.15);
+      const installation = Math.round(subtotal * 0.28);
       const vat = Math.round((subtotal + installation) * 0.16);
-      const grandTotal = subtotal + installation + vat;
+      const grandTotal = subtotal + installation;
 
       document.getElementById('subtotal').textContent = 'K' + subtotal.toLocaleString();
       document.getElementById('installation').textContent = 'K' + installation.toLocaleString();
-      document.getElementById('vat').textContent = 'K' + vat.toLocaleString();
       document.getElementById('grandTotal').textContent = 'K' + grandTotal.toLocaleString();
 
       // WhatsApp message
-      const whatsappMsg = `Hello VoltaElectrical! I received quote ${quoteRef} for ${system.name}. Total: K${grandTotal.toLocaleString()}. Name: ${document.getElementById('solarName').value}, Location: ${document.getElementById('solarLocation').value}. I'd like to proceed.`;
+      const whatsappMsg = `Hello VoltaElectrical! I received quote ${quoteRef} for ${system.name}. Total: K${grandTotal.toLocaleString()}. Name: ${document.getElementById('solarName').value}, Location: ${document.getElementById('solarLocation').value}. Please send a detailed quotation for this on my whatsApp.`;
       document.getElementById('whatsappBtn').onclick = function() {
         window.open(`https://wa.me/260978195399?text=${encodeURIComponent(whatsappMsg)}`, '_blank');
       };
