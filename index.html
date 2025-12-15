@@ -26,6 +26,8 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
+  <link href="assets/css/solar-calculator.css" rel="stylesheet">
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-K25C46JTGJ"></script>
   <script>
@@ -130,80 +132,88 @@
       </div>
     </section><!-- /Hero Section -->
 
-  <section id="why-us" class="section light-background">
-    <div class="container text-center">
-      <h2>Why Choose VoltaElectrical</h2>
-      <div class="row mt-4">
-        <div class="col-md-4">
-          <i class="bi bi-shield-lock display-5 text-primary"></i>
-          <h5>Safety First</h5>
-          <p>Every project complies with ZESCO and EIZ electrical safety standards.</p>
-        </div>
-        <div class="col-md-4">
-          <i class="bi bi-clock-history display-5 text-primary"></i>
-          <h5>Fast Response</h5>
-          <p>Same-day service for faults and emergencies in Lusaka.</p>
-        </div>
-        <div class="col-md-4">
-          <i class="bi bi-currency-dollar display-5 text-primary"></i>
-          <h5>Transparent Pricing</h5>
-          <p>No hidden fees — upfront quotations for every job.</p>
+  
+    <section id="why-us" class="section light-background">
+      <div class="container text-center">
+        <h2 class="mb-4">Why Choose VoltaElectrical</h2>
+        <div class="row mt-4 g-4">
+
+          <div class="col-12 col-md-4">
+            <i class="bi bi-shield-lock display-4 text-primary mb-3"></i>
+            <h5>Safety First</h5>
+            <p>Fully compliant & safe.</p>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <i class="bi bi-clock-history display-4 text-primary mb-3"></i>
+            <h5>Fast Response</h5>
+            <p>Same-day service.</p>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <i class="bi bi-currency-dollar display-4 text-primary mb-3"></i>
+            <h5>Transparent Pricing</h5>
+            <p>No hidden fees.</p>
+          </div>
+
         </div>
       </div>
-    </div>
-</section>
+    </section>
 
-<!--  Consultation section start -->
-<section id="consultation" class="container section-title" class="hero-actions" data-aos="fade-up" data-aos-delay="400">
-  <div class="container" text-center>
-    <h2 class="mb-3">Book a Professional Electrical Consultation</h2>
-      <p class="lead mb-4">Get expert electrical advice without leaving your home or office for Zambians living in the diaspora</p>
-    <ul class="list-unstyled mb-4">
-      <li>30 Minute WhatsApp or Zoom Consultation – <strong>K150</strong></li>
-      <li>1 Hour Project Review (Solar/Wiring Plan) – <strong>K300</strong></li>
-    </ul>
-    <a class="btn btn-book" href="https://wa.me/260978195399?text=Hello%20VoltaElectrical,%20I%20need%20help%20with%20my%20electrical%20project.">
-      <i class="bi bi-whatsapp"></i> Book via WhatsApp
-    </a>
-  </div>
-</section>
-<!--  Consultation section end -->
+    <section class="container section-title-custom"  data-aos="fade-up" data-aos-delay="200">
+      <h2 class="mb-3">Say Goodbye to Loadshedding!</h2> 
+    </section>
 
     <!-- About Section -->
     <section id="about" class="about section">
-
       <div class="container" data-aos="fade-up" data-aos-delay="100">
-
         <div class="row align-items-center">
 
           <div class="col-lg-6 order-2 order-lg-1" data-aos="fade-right" data-aos-delay="200">
             <div class="content">
-              <h2 class="section-heading mb-4">Solar Installation & Backup Power</h2>
-              <p class="lead-text mb-4">Experience uninterrupted power with our professional solar solutions.</p>
-              <div class="divider my-4"></div>
-              <div class="cta-section" data-aos="fade-up" data-aos-delay="450">
-                <a href="#services" class="cta-link">
-                  Explore Our Services
-                  <i class="bi bi-arrow-right ms-2"></i>
-                </a>
+              <p class="lead-text mb-3">
+                Join 35+ Zambian homes and businesses already enjoying uninterrupted power.
+                We design and install solar systems that match how you actually use electricity.
+              </p>
+
+              <p class="mb-4 d-none d-lg-block">
+                Every home is different. The appliances you use and the hours you need backup
+                are not the same as your neighbour’s. That’s why we don’t sell fixed solar packages —
+                we first calculate your power usage to design the right system for you.
+              </p>
+
+              <div class="d-flex flex-column gap-2 mb-4 small">
+                <span><i class="bi bi-check-circle-fill text-success"></i> Design & installation</span>
+                <span><i class="bi bi-check-circle-fill text-success"></i> Lithium batteries & inverters</span>
+                <span><i class="bi bi-check-circle-fill text-success"></i> Warranty & support</span>
               </div>
+
+
+              <div class="cta-section" data-aos="fade-up" data-aos-delay="450">
+                <button class="btn btn-orange" data-bs-toggle="modal" data-bs-target="#solarCalculatorModal" style="margin-bottom: 10px;">
+                  <i class="bi bi-calculator"></i> Calculate My Solar Needs
+                </button>
+
+                <p class="mt-2">Or call us: <strong>+260 97 819 5399</strong></p>
+              </div>
+
             </div>
           </div>
 
           <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="200">
             <div class="image-section">
               <div class="main-image">
-                <img src="assets/img/construction/solar3.jpeg" alt="Construction project showcase" class="img-fluid">
-              </div>
-                </div>
+                <img src="assets/img/construction/solar panel.avif" alt="Solar installation in Zambia" class="img-fluid">
               </div>
             </div>
           </div>
 
         </div>
-
       </div>
-    </section><!-- /About Section -->
+
+    </section>
+    <!-- /About Section -->
+
 
     <!-- Services Section -->
     <section id="services" class="services section light-background">
@@ -212,8 +222,9 @@
       <div class="container section-title" data-aos="fade-up">
         <h2>Our Services</h2>
         <p>We are experts in home wiring, solar installation, geyser installation, troubleshooting and maintenance, CCTV installation and smart lighting.</p>
-</div>
-      </div><!-- End Section Title -->
+      </div>
+      </div>
+      <!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -1080,17 +1091,441 @@
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
 
-  <!-- Floating Call Button -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const btn = document.getElementById("floating-call");
-      function toggleButton() {
-        btn.style.display = window.innerWidth < 992 ? "flex" : "none";
-      }
-      toggleButton();
-      window.addEventListener("resize", toggleButton);
-    });
-  </script>
 
+ <!-- Solar calculator modal -->
+ <div class="modal fade" id="solarCalculatorModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content solar-calculator">
+            
+            <div class="modal-header text-center d-block">
+                <img src="assets/img/logo.png" 
+                    alt="voltaelectrical_logo" 
+                    class="logo-img"
+                    style="width: 60px; margin-bottom: 8px;">
+                <h1 style="margin-top: 4px; color: #ffffff; font-weight: 700;">
+                    <i class="bi bi-sun-fill text-warning"></i>
+                    SOLAR SYSTEM CALCULATOR
+                </h1>
+                <p style="color: #ffffff;">Calculate your home's energy needs and get system sizing.</p>
+            </div>
+
+            <div class="modal-body">
+                <h4><i class="bi bi-lightning-fill" style="color:#ff7b00;"></i> Quick Add Common Appliances</h4>
+                <p class="text-muted small mb-3">Tap on an appliance to add it to your list with standard usage values.</p>
+                <div class="row g-2 mb-4" id="presetGrid">
+                    
+                    <div class="col-4 col-md-2">
+                        <button class="btn btn-outline-success w-100 preset-btn" 
+                                data-name="Fridge" data-watt="200" data-peak="2" data-hours="5">
+                            <i class="bi bi-snow"></i> Fridge (200W)
+                        </button>
+                    </div>
+
+                    <div class="col-4 col-md-2">
+                        <button class="btn btn-outline-success w-100 preset-btn" 
+                                data-name="Wall Fan" data-watt="60" data-qty="1" data-hours="5">
+                            <i class="bi bi-fan"></i> Medium Fan (60W)
+                        </button>
+                    </div>
+
+                    <div class="col-4 col-md-2">
+                        <button class="btn btn-outline-success w-100 preset-btn" 
+                                data-name="TV & Sound" data-watt="100" data-qty="1" data-hours="5">
+                            <i class="bi bi-tv"></i> TV 32"/sound system (80W)
+                        </button>
+                    </div>
+                    
+                    <div class="col-4 col-md-2">
+                        <button class="btn btn-outline-success w-100 preset-btn" 
+                                data-name="Lights (LED)" data-watt="25" data-qty="1" data-hours="5">
+                            <i class="bi bi-lightbulb"></i> Indoor Lights (25W)
+                        </button>
+                    </div>
+
+                    <div class="col-4 col-md-2">
+                        <button class="btn btn-outline-success w-100 preset-btn" 
+                                data-name="Lights (LED)" data-watt="120" data-qty="1" data-hours="5">
+                            <i class="bi bi-lightbulb"></i> Security Lights 120W
+                        </button>
+                    </div>
+
+                    <div class="col-4 col-md-2">
+                        <button class="btn btn-outline-warning w-100 preset-btn" 
+                                data-name="Iron" data-watt="1000" data-qty="1" data-hours="1">
+                            <i class="bi bi-box-seam"></i> Pressing Iron (1000W)
+                        </button>
+                    </div>
+                    
+                    <div class="col-4 col-md-2">
+                        <button class="btn btn-outline-success w-100 preset-btn" 
+                                data-name="washing machine" data-watt="550" data-qty="1" data-hours="5">
+                            <i class="bi bi-moisture"></i> Washing Machine (550W)
+                        </button>
+                    </div>
+
+                    <div class="col-4 col-md-2">
+                        <button class="btn btn-outline-warning w-100 preset-btn" 
+                                data-name="laptop" data-watt="65" data-qty="1" data-hours="1">
+                            <i class="bi bi-laptop"></i> Laptop (65W)
+                        </button>
+                    </div>
+
+                    <div class="col-4 col-md-2">
+                        <button class="btn btn-outline-success w-100 preset-btn" 
+                                data-name="pump" data-watt="1200" data-qty="1" data-hours="5">
+                            <i class="bi bi-water"></i> water Pump 1.5HP (1200W)
+                        </button>
+                    </div>
+
+                    </div>
+                
+                <hr>
+
+                <h4><i class="bi bi-plus-circle-dotted" style="color:#ff7b00;"></i> Add Custom Appliance</h4>
+                <div class="row g-3 mb-4">
+                    <div class="col-md-3">
+                        <label class="form-label">Appliance Name</label>
+                        <input type="text" id="customName" class="form-control" placeholder="e.g., Laptop, Water Pump">
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Power (Watts)</label>
+                        <input type="number" id="customWatt" class="form-control" placeholder="Enter appliance power in Watts e.g. 60">
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Quantity</label>
+                        <input type="number" id="customQty" class="form-control" placeholder="Enter quantity e.g 1">
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">Hours per Day</label>
+                        <input type="number" step="0.5" id="customHours" class="form-control" placeholder="Enter hours used per day e.g. 5">
+                    </div>
+                    <div class="col-md-3 d-flex align-items-end">
+                        <button class="btn btn-primary" style="background-color:#ff7b00; border: none;" onclick="addCustomAppliance()">Add Appliance</button>
+                    </div>
+                </div>
+
+                <hr>
+
+                <h4><i class="bi bi-clipboard2-check"></i> Your Energy Load List</h4>
+                <div id="results-section" class="table-responsive mb-4">
+                    <table class="table table-striped" id="applianceTable">
+                        <thead>
+                            <tr>
+                                <th>Appliance Name</th>
+                                <th>Power (Watts)</th>
+                                <th>Quantity</th>
+                                <th>Hours/Day</th>
+                                <th>Total Wh/Day</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="applianceList">
+                            <tr><td colspan="6" class="text-center text-muted">No appliances added yet. Use 'Add Appliance' above!</td></tr>
+                        </tbody>
+                        <tfoot>
+
+                          <tr class="table-footer-total">
+                            <td colspan="4" class="text-end">TOTAL ENERGY</td>
+                            <td id="tableTotalWh">0</td>
+                            <td></td>
+                          </tr>
+                        </tfoot>
+
+                    </table>
+                    <p class="text-muted small mt-0">
+                      This total is used to calculate your solar system size.
+                    </p>
+                </div>
+
+                <hr>
+                
+                <div class="section">
+                    <h2><i class="bi bi-bullseye" style="color:#ff7b00;"></i> Recommended Solar System</h2>
+                    <p class="text-muted small">
+                      Based on the appliances you selected, here is the system needed to power your home safely and reliably.
+                    </p>
+                    <div class="results-grid">
+                        
+                        <div class="result-card">
+                            <div class="result-label">Daily Energy Use</div>
+                            <div class="result-value" id="dailyEnergy"></div>
+                            <div class="result-unit">Total electricity you use per day</div>
+                             
+                        </div>
+                        
+                        <div class="result-card">
+                            <div class="result-label">Total solar power needed</div>
+                            <div class="result-value" id="panelSize"></div>
+                            <div class="result-unit">Power (Watts Peak)</div>
+                        </div>
+
+                        <div class="result-card">
+                            <div class="result-label">Number of Solar Panels</div>
+                            <div class="result-value" id="solarPanels"></div>
+                            <div class="result-unit">Panel(s)</div>
+                        </div>
+
+                        <div class="result-card">
+                            <div class="result-label">Inverter Size</div>
+                            <div class="result-value" id="inverterSize"></div> 
+                            <div class="result-unit">KVA</div>
+                        </div>
+
+                        <div class="result-card">
+                            <div class="result-label">Battery Storage Needed</div>
+                            <div class="result-value" id="batteryWh"></div>
+                            <div class="result-unit">KWh</div>
+                        </div>
+                    </div>
+                </div>
+                
+
+                <div class="section settings-section mt-4">
+                    <h2><i class="bi bi-gear-fill shiny-metal"  ></i> System Configuration</h2>
+                    <hr>
+
+                    <p class="text-muted small">Adjust these values to fine-tune your calculation.</p>
+                    <div class="settings-grid">
+                        <div class="input-group">
+                            <label>Battery Voltage (V)</label>
+                            <select id="batteryVoltage" onchange="calculate()">
+                                <option value="12">12V</option>
+                                <option value="24">24V</option>
+                                <option value="48" selected>48V</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Days of Backup (No Sun Light)</label>
+                            <input type="number" id="daysAutonomy" value="1" min="1" max="5" onchange="calculate()">
+                        </div>
+                        <div class="input-group">
+                            <label>Peak Sun Hours</label>
+                            <input type="number" id="sunHours" value="5" min="3" max="8" step="0.5" onchange="calculate()">
+                        </div>
+                        <div class="input-group">
+                            <label>System Efficiency (%)</label>
+                            <input type="number" id="efficiency" value="80" disabled>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calculator-cta-section">
+                    <h3>Ready for a Professional Quote?</h3>
+                    <p> Share your results with VoltaElectrical and get a custom solar solution.</p>
+                    <a href="#" id="whatsapp-link" class="btn-whatsapp-calculator">
+                        <i class="bi bi-whatsapp me-2"></i> Get Free Quote
+                    </a>
+                  
+                    <p class="text-muted small mt-1">
+                      <i class="bi bi-check-circle-fill text-success me-1"></i>
+                      Trusted by 35+ homes across Zambia
+                    </p>
+                </div>
+
+              <div class="modal-footer">
+                  <button class="btn btn-secondary" style="background-color:#ff7b00; border: none" data-bs-dismiss="modal">Close</button>
+              </div>
+
+        </div>
+    </div>
+</div>
+
+<!--  ==================JS SOLAR CALCULATOR ================ -->
+<script>
+  let appliances = [];
+
+  document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll('.preset-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+              const name = this.dataset.name;
+              const watt = parseFloat(this.dataset.watt);
+              const qty = parseInt(this.dataset.qty || 1);
+              const hours = parseFloat(this.dataset.hours);
+
+              appliances.push({ name, watt, qty, hours });
+              renderAppliances();
+              scrollToResults();
+          });
+      });
+  });
+
+  function addCustomAppliance() {
+      const name = document.getElementById('customName').value;
+      const watt = parseFloat(document.getElementById('customWatt').value);
+      const qty = parseInt(document.getElementById('customQty').value);
+      const hours = parseFloat(document.getElementById('customHours').value);
+
+      if (!name || !watt || !qty || !hours) {
+          alert("Please fill all fields");
+          return;
+      }
+
+      appliances.push({ name, watt, qty, hours });
+
+      document.getElementById('customName').value = "";
+      document.getElementById('customWatt').value = "";
+      document.getElementById('customQty').value = "1";
+      document.getElementById('customHours').value = "";
+
+      renderAppliances();
+      scrollToResults();
+  }
+
+  function removeAppliance(i) {
+      appliances.splice(i, 1);
+      renderAppliances();
+  }
+
+  function renderAppliances() {
+      const list = document.getElementById('applianceList');
+      const totalCell = document.getElementById('tableTotalWh');
+
+      if (appliances.length === 0) {
+          list.innerHTML = `
+            <tr>
+              <td colspan="6" class="text-center text-muted">
+                No appliances added yet. Use 'Quick Add' above!
+              </td>
+            </tr>`;
+          totalCell.textContent = "0";
+          calculate();
+          return;
+      }
+
+      let totalWh = 0;
+
+      list.innerHTML = appliances.map((a, i) => {
+          const rowWh = a.watt * a.qty * a.hours;
+          totalWh += rowWh;
+
+          return `
+            <tr>
+              <td>${a.name}</td>
+              <td>${a.watt}</td>
+              <td>${a.qty}</td>
+              <td>${a.hours}</td>
+              <td>${rowWh.toFixed(1)}</td>
+              <td>
+                <button class="btn btn-danger btn-sm" onclick="removeAppliance(${i})">
+                  Remove
+                </button>
+              </td>
+            </tr>`;
+      }).join("");
+
+      totalCell.textContent = `${Math.round(totalWh)} Wh/day`;
+
+      calculate();
+  }
+
+  function calculate() {
+      let totalWh = 0;
+      let peakPower = 0;
+
+      appliances.forEach(a => {
+          totalWh += a.watt * a.qty * a.hours;
+          peakPower += a.watt * a.qty;
+      });
+
+      /* ============== SYSTEM CONFIGURATION =============== */
+      const batteryVoltage = Number(document.getElementById('batteryVoltage').value);
+      const daysAutonomy   = Number(document.getElementById('daysAutonomy').value);
+      const sunHours       = Number(document.getElementById('sunHours').value);
+      
+      /* ===== FIXED DC AND AC LOSSES ===== */
+      const dc_loss = 0.94;   // 6% DC loss
+      const ac_loss = 0.90;   // 10% AC loss
+      const system_loss = dc_loss * ac_loss; // ≈ 0.846
+
+     
+      const PANEL_WATT = 558;
+      const BATTERY_AH = 100;
+      const DOD = 0.80;
+
+      /* ===== ENERGY WITH LOSSES ===== */
+      const energyWithLosses = totalWh / system_loss;
+
+      /* ===== SOLAR PANELS ===== */
+      const pvRequiredW = energyWithLosses / sunHours;
+      const panelsTheory = pvRequiredW / PANEL_WATT;
+      const panelsChosen = Math.ceil(panelsTheory);
+
+      const panelUnderCap =
+          ((panelsChosen - panelsTheory) / panelsTheory) * 100;
+
+      /* ===== BATTERIES ===== */
+      const batteryWh = batteryVoltage * BATTERY_AH * DOD;
+      const storageRequired = energyWithLosses * daysAutonomy;
+      const batteriesTheory = storageRequired / batteryWh;
+      const batteriesChosen = Math.ceil(batteriesTheory);
+
+      const batteryUnderCap =
+          ((batteriesChosen - batteriesTheory) / batteriesTheory) * 100;
+
+      /* ===== INVERTER ===== */
+      const inverterSizeKVA = Math.ceil((peakPower / 0.8) / 1000);
+
+      /* ----- Recommended Solar System*/
+      document.getElementById('dailyEnergy').textContent =
+          Math.round(totalWh) + " KWh/day";
+
+
+      document.getElementById('panelSize').textContent =
+          Math.round(pvRequiredW) + " W";
+
+      document.getElementById('solarPanels').textContent =
+          `${panelsChosen} × ${PANEL_WATT}W `;
+
+      document.getElementById('batteryWh').textContent =
+          `${batteriesChosen} × ${batteryVoltage}V  ${BATTERY_AH}Ah`;
+
+      document.getElementById('inverterSize').textContent =
+          inverterSizeKVA + " kVA";
+
+
+      const whatsappMsg = `
+      Hello VoltaElectrical,
+
+      I used your Solar Calculator and would like a professional quote
+
+      Daily Energy Usage is: ${(totalWh / 1000).toFixed(2)} kWh
+      Solar Panels Required: ${panelsChosen} × ${PANEL_WATT}W
+      Battery Storage: ${batteriesChosen} × ${batteryVoltage}V ${BATTERY_AH}Ah
+      Backup Duration: ${daysAutonomy} days
+      Inverter Size: ${inverterSizeKVA} kVA
+
+      Please advise on the system pricing and installation.
+      `.trim();
+
+      document.getElementById('whatsapp-link').href =
+        `https://wa.me/260978195399?text=${encodeURIComponent(whatsappMsg)}`;
+    }
+
+
+  // function scrollToResults() {
+  //   const results = document.getElementById("results-section");
+  //   if (results) {
+  //     results.scrollIntoView({ behavior: "smooth", block: "start" });
+  //   }
+  // }
+
+
+function scrollToResults() {
+  const results = document.getElementById("results-section");
+  const modalBody = document.querySelector("#solarCalculatorModal .modal-body");
+
+  if (!results || !modalBody) return;
+
+  const modalRect = modalBody.getBoundingClientRect();
+  const resultsRect = results.getBoundingClientRect();
+
+  modalBody.scrollTo({
+    top: modalBody.scrollTop + (resultsRect.top - modalRect.top) - 15,
+    behavior: "smooth"
+  });
+}
+
+
+</script>
 </body>
 </html>

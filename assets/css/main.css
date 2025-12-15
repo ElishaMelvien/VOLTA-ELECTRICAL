@@ -1134,9 +1134,16 @@ section,
 
 .about .image-section .main-image img {
   width: 100%;
-  height: auto;
+  height: 420px;
   transition: transform 0.3s ease;
 }
+
+@media (max-width: 768px) {
+  .about .image-section .main-image {
+    height: 260px;
+  }
+}
+
 
 .about .image-section .main-image:hover img {
   transform: scale(1.02);
@@ -4972,4 +4979,50 @@ header.header {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+
+
+.section-title-custom {
+  text-align: center;
+  padding-bottom: 8px;
+  position: relative;
+}
+
+.section-title-custom h2 {
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.section-title-custom h2:before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 160px;
+  height: 1px;
+  background: color-mix(in srgb, var(--default-color), transparent 60%);
+  left: 0;
+  right: 0;
+  bottom: 1px;
+  margin: auto;
+}
+
+.section-title-custom h2::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--accent-color);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.section-title-custom p {
+  margin-bottom: 0;
 }
