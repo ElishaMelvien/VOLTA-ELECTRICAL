@@ -6,7 +6,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>VoltaElectrical | Trusted Electricians in Zambia</title>
   <meta name="description" content="VoltaElectrical provides safe, reliable and affordable electrical services in Lusaka and across Zambia. Specialists in house wiring, solar installation, fault finding, and electrical maintenance.">
-  <meta name="keywords" content="electrician Lusaka, house wiring Zambia, solar installation Zambia, electrical repairs Lusaka, VoltaElectrical">
+  <meta name="keywords" content="electrician in Lusaka, house wiring Lusaka, solar installation Lusaka, electrical repairs Lusaka, electrical services Zambia, solar installation Zambia, trusted electricians Zambia, VoltaElectrical, Volta Electrical">
 
   <!-- Favicons -->
   <link href="assets/img/logo.png" rel="icon" type="image/png">
@@ -82,18 +82,20 @@
         <div class="row justify-content-center text-center">
           <div class="col-lg-8">
             <div class="hero-content">
-              <h1 data-aos="fade-up" data-aos-delay="200">Zambia’s Trusted Electricians </h1>
+              <h1 data-aos="fade-up" data-aos-delay="200">Trusted Electricians in Lusaka & Across Zambia</h1>
+
               <h2></h2>
               <p data-aos="fade-up" data-aos-delay="300">
                 We provide safe, reliable and high-quality electrical solutions, including house wiring, warehouse and lodge wiring, geyser installations, solar and backup power setups, and home automation solutions.  
                 We also specialize in fault-finding, and CCTV security installations—to keep your property powered and protected 
-                  <a href="quote.html" class="submit-btn">Get a free Quote!</a>
+                  <a href="quote.html" class="submit-btn">View sample Quote!</a>
               </p>
               <div class="hero-actions" data-aos="fade-up" data-aos-delay="400">
-                <a href="projects.html" class="btn btn-secondary">View Projects</a>
-                <a class="btn btn-primary" href="https://wa.me/260978195399?text=Hi%20Volta Electrical,%20I%20would%20like a%20quote%20for house wiring.">
-                  <i class="bi bi-whatsapp"></i> WhatsApp Us
+                <a class="btn btn-primary" href="https://wa.me/260978195399?text=Hi%20Volta%20Electrical,%20I%20found%20you%20on%20Google%20and%20would%20like%20a%20quote%20for%20electrical%20services%20in%20Lusaka.">
+                  <i class="bi bi-whatsapp"></i> Get Free Quote
                 </a>
+                <a href="projects.html" class="btn btn-secondary">View Projects</a>
+                
               </div>
 
               <div class="hero-stats" data-aos="fade-up" data-aos-delay="500">
@@ -1438,43 +1440,47 @@
       const system_loss = dc_loss * ac_loss; // ≈ 0.846
 
      
-      const PANEL_WATT = 558;
-      const BATTERY_AH = 100;
-      const DOD = 0.80;
+      const PANEL_WATT = 550;
+      const BATTERY_AH = 200;
+      const DOD = 0.8;
+      // const SUN_HOURS = 5;
 
       /* ===== ENERGY WITH LOSSES ===== */
-      const energyWithLosses = totalWh / system_loss;
+      const energy_With_Losses = totalWh / system_loss;
+      console.log(energy_With_Losses, "ENERGY WITH LOSSES ========");  
 
-      /* ===== SOLAR PANELS ===== */
-      const pvRequiredW = energyWithLosses / sunHours;
-      const panelsTheory = pvRequiredW / PANEL_WATT;
-      const panelsChosen = Math.ceil(panelsTheory);
+      /* ====== SOLAR PANELS =================== */
+      const required_pv_power = energy_With_Losses / sunHours;
+      console.log(required_pv_power, "REQUIRED PV POWER ========");
+      const panels_in_theory = required_pv_power / PANEL_WATT; 
+      console.log(panels_in_theory, "PANELS IN THEORY ========");
+      const total_panels  = Math.ceil(panels_in_theory)
 
-      const panelUnderCap =
-          ((panelsChosen - panelsTheory) / panelsTheory) * 100;
+      /* ============= SOLAR PANELS ============ */
 
-      /* ===== BATTERIES ===== */
-      const batteryWh = batteryVoltage * BATTERY_AH * DOD;
-      const storageRequired = energyWithLosses * daysAutonomy;
-      const batteriesTheory = storageRequired / batteryWh;
-      const batteriesChosen = Math.ceil(batteriesTheory);
+      const BATTERY_VOLTAGE = 51.2;
+      const batteryWh = BATTERY_VOLTAGE * BATTERY_AH * DOD; // Wh per battery
+      const total_battery_capacity = energy_With_Losses * daysAutonomy; // Wh total
+      let batteriesTheory = total_battery_capacity / batteryWh;
+      let batteriesChosen = Math.ceil(batteriesTheory);
 
-      const batteryUnderCap =
-          ((batteriesChosen - batteriesTheory) / batteriesTheory) * 100;
+
+      /*  ============== BATTERY CAPACITY*/
+      system_voltage = BATTERY_VOLTAGE;
+      const battery_capacity = 0;
 
       /* ===== INVERTER ===== */
       const inverterSizeKVA = Math.ceil((peakPower / 0.8) / 1000);
 
       /* ----- Recommended Solar System*/
       document.getElementById('dailyEnergy').textContent =
-          Math.round(totalWh) + " KWh/day";
-
+          (totalWh / 1000).toFixed(2) + " kWh/day"
 
       document.getElementById('panelSize').textContent =
-          Math.round(pvRequiredW) + " W";
+          Math.round(required_pv_power) + " W";
 
       document.getElementById('solarPanels').textContent =
-          `${panelsChosen} × ${PANEL_WATT}W `;
+          `${total_panels} × ${PANEL_WATT}W `;
 
       document.getElementById('batteryWh').textContent =
           `${batteriesChosen} × ${batteryVoltage}V  ${BATTERY_AH}Ah`;
@@ -1489,7 +1495,7 @@
       I used your Solar Calculator and would like a professional quote
 
       Daily Energy Usage is: ${(totalWh / 1000).toFixed(2)} kWh
-      Solar Panels Required: ${panelsChosen} × ${PANEL_WATT}W
+      Solar Panels Required: ${total_panels} × ${PANEL_WATT}W
       Battery Storage: ${batteriesChosen} × ${batteryVoltage}V ${BATTERY_AH}Ah
       Backup Duration: ${daysAutonomy} days
       Inverter Size: ${inverterSizeKVA} kVA
@@ -1502,29 +1508,20 @@
     }
 
 
-  // function scrollToResults() {
-  //   const results = document.getElementById("results-section");
-  //   if (results) {
-  //     results.scrollIntoView({ behavior: "smooth", block: "start" });
-  //   }
-  // }
+  function scrollToResults() {
+    const results = document.getElementById("results-section");
+    const modalBody = document.querySelector("#solarCalculatorModal .modal-body");
 
+    if (!results || !modalBody) return;
 
-function scrollToResults() {
-  const results = document.getElementById("results-section");
-  const modalBody = document.querySelector("#solarCalculatorModal .modal-body");
+    const modalRect = modalBody.getBoundingClientRect();
+    const resultsRect = results.getBoundingClientRect();
 
-  if (!results || !modalBody) return;
-
-  const modalRect = modalBody.getBoundingClientRect();
-  const resultsRect = results.getBoundingClientRect();
-
-  modalBody.scrollTo({
-    top: modalBody.scrollTop + (resultsRect.top - modalRect.top) - 15,
-    behavior: "smooth"
-  });
-}
-
+    modalBody.scrollTo({
+      top: modalBody.scrollTop + (resultsRect.top - modalRect.top) - 15,
+      behavior: "smooth"
+    });
+  }
 
 </script>
 </body>
