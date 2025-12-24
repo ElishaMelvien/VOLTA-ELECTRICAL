@@ -214,65 +214,74 @@ const systemPrices = {
     });
 
     // Form submission
-    document.getElementById('solarQuoteForm').addEventListener('submit', function(e) {
-      e.preventDefault();
+    const solarQuoteForm = document.getElementById('solarQuoteForm');
+    if (solarQuoteForm) {
+      solarQuoteForm.addEventListener('submit', function(e) {
+        e.preventDefault();
 
-      const systemType = document.getElementById('systemType').value;
-      if (!systemType) {
-        alert('Please select a solar system size');
-        return;
-      }
+        const systemType = document.getElementById('systemType').value;
+        if (!systemType) {
+          alert('Please select a solar system size');
+          return;
+        }
 
-      // Generate quote reference
-      const quoteRef = 'VE-' + Date.now().toString().slice(-8);
-      const today = new Date().toLocaleDateString('en-GB');
+        // Generate quote reference
+        const quoteRef = 'VE-' + Date.now().toString().slice(-8);
+        const today = new Date().toLocaleDateString('en-GB');
 
-      // Display client info
-      document.getElementById('quoteRef').textContent = quoteRef;
-      document.getElementById('quoteDate').textContent = today;
-      document.getElementById('displayName').textContent = document.getElementById('solarName').value;
-      document.getElementById('displayPhone').textContent = document.getElementById('solarPhone').value;
-      document.getElementById('displayEmail').textContent = document.getElementById('solarEmail').value || 'N/A';
-      document.getElementById('displayLocation').textContent = document.getElementById('solarLocation').value;
+        // Display client info
+        document.getElementById('quoteRef').textContent = quoteRef;
+        document.getElementById('quoteDate').textContent = today;
+        document.getElementById('displayName').textContent = document.getElementById('solarName').value;
+        document.getElementById('displayPhone').textContent = document.getElementById('solarPhone').value;
+        document.getElementById('displayEmail').textContent = document.getElementById('solarEmail').value || 'N/A';
+        document.getElementById('displayLocation').textContent = document.getElementById('solarLocation').value;
 
-      // Build line items
-      const system = systemPrices[systemType];
-      let lineItemsHtml = '';
-      let subtotal = 0;
+        // Build line items
+        const system = systemPrices[systemType];
+        let lineItemsHtml = '';
+        let subtotal = 0;
 
-      // Add system components
-      system.components.forEach(comp => {
-        lineItemsHtml += `
-          <div class="line-item">
-            <span class="item-name">${comp.name}</span>
-            <span class="item-price">K${comp.price.toLocaleString()}</span>
-          </div>
-        `;
-        subtotal += comp.price;
+        // Add system components
+        system.components.forEach(comp => {
+          lineItemsHtml += `
+            <div class="line-item">
+              <span class="item-name">${comp.name}</span>
+              <span class="item-price">K${comp.price.toLocaleString()}</span>
+            </div>
+          `;
+          subtotal += comp.price;
+        });
+
+        document.getElementById('lineItemsList').innerHTML = lineItemsHtml;
+
+        // Calculate totals
+        const installation = Math.round(subtotal * 0.28);
+        const vat = Math.round((subtotal + installation) * 0.16);
+        const grandTotal = subtotal + installation;
+
+        document.getElementById('subtotal').textContent = 'K' + subtotal.toLocaleString();
+        document.getElementById('installation').textContent = 'K' + installation.toLocaleString();
+        document.getElementById('grandTotal').textContent = 'K' + grandTotal.toLocaleString();
+
+        // WhatsApp message
+        const whatsappMsg = `Hello VoltaElectrical! I received quote ${quoteRef} for ${system.name}. Total: K${grandTotal.toLocaleString()}. Name: ${document.getElementById('solarName').value}, Location: ${document.getElementById('solarLocation').value}. Please send a detailed quotation for this on my whatsApp.`;
+        const whatsappBtn = document.getElementById('whatsappBtn');
+        if (whatsappBtn) {
+          whatsappBtn.onclick = function() {
+            window.open(`https://wa.me/260978195399?text=${encodeURIComponent(whatsappMsg)}`, '_blank');
+          };
+        }
+
+        // Show quotation and hide form
+        solarQuoteForm.style.display = 'none';
+        const quoteResultEl = document.getElementById('quoteResult');
+        if (quoteResultEl) {
+          quoteResultEl.classList.add('show');
+          quoteResultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       });
-
-      document.getElementById('lineItemsList').innerHTML = lineItemsHtml;
-
-      // Calculate totals
-      const installation = Math.round(subtotal * 0.28);
-      const vat = Math.round((subtotal + installation) * 0.16);
-      const grandTotal = subtotal + installation;
-
-      document.getElementById('subtotal').textContent = 'K' + subtotal.toLocaleString();
-      document.getElementById('installation').textContent = 'K' + installation.toLocaleString();
-      document.getElementById('grandTotal').textContent = 'K' + grandTotal.toLocaleString();
-
-      // WhatsApp message
-      const whatsappMsg = `Hello VoltaElectrical! I received quote ${quoteRef} for ${system.name}. Total: K${grandTotal.toLocaleString()}. Name: ${document.getElementById('solarName').value}, Location: ${document.getElementById('solarLocation').value}. Please send a detailed quotation for this on my whatsApp.`;
-      document.getElementById('whatsappBtn').onclick = function() {
-        window.open(`https://wa.me/260978195399?text=${encodeURIComponent(whatsappMsg)}`, '_blank');
-      };
-
-      // Show quotation and hide form
-      document.getElementById('solarQuoteForm').style.display = 'none';
-      document.getElementById('quoteResult').classList.add('show');
-      document.getElementById('quoteResult').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+    }
     // ============== end solar quote modal ====================
     // System card selection
 document.querySelectorAll('.system-card').forEach(card => {
