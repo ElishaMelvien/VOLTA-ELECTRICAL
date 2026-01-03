@@ -1,7 +1,20 @@
+:root {
+  --brand-orange: #FFA500;
+  --brand-orange-dark: #e59400;
+  --brand-black: #0b0b0b;
+  --brand-gray: #6c757d;
+  --brand-bg-soft: #fff7e0;
+}
+
+
 /* Custom styles for the Solar Calculator Modal */
 .solar-calculator .modal-header {
-    border-bottom: 2px solid #FFA500;
+    border-bottom: 3px solid #FFA500;
     background-color: #060606;
+}
+
+.solar-calculator .modal-header h1 {
+  letter-spacing: 1px;
 }
 
 
@@ -12,14 +25,35 @@
     gap: 10px;
 }
 
-.result-card {
+/* .result-card {
     background: #f8f9fa;
     border: 1px solid #dee2e6;
     border-radius: 8px;
     padding: 15px;
     text-align: center;
     border-color:#ff7b00;
+} */
+
+.result-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
 }
+
+/* Authority accent line */
+.result-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 5px;
+  width: 100%;
+  background: var(--brand-orange);
+  border-radius: 16px 16px 0 0;
+}
+
 
 .result-label {
     font-size: 0.85rem;
@@ -27,18 +61,36 @@
     margin-bottom: 5px;
 }
 
-.result-value {
+/* .result-value {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #FFA500; /* Bootstrap Primary Color */
+    color: #FFA500;
 }
 
-/* Recommended System Sizing */
 .result-unit {
     font-size: 0.9rem;
     font-weight: 500;
     color: #342c26;
+} */
+
+.result-label {
+  font-size: 0.8rem;
+  color: var(--brand-gray);
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
 }
+
+.result-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--brand-black);
+}
+
+.result-unit {
+  font-size: 0.9rem;
+  color: var(--brand-gray);
+}
+
 
 /* Settings Grid */
 .settings-grid {

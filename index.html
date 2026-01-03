@@ -562,7 +562,7 @@
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
             <div class="project-card">
               <div class="project-image">
-                <img src="assets/img/construction/db.jpg" alt="Project" class="img-fluid">
+                <img src="assets/img/construction/db-kh-3a.jpg" alt="Project" class="img-fluid">
                 <div class="project-overlay">
                   <div class="project-status completed">Completed</div>
                   <div class="project-actions">
@@ -572,8 +572,8 @@
               </div>
               <div class="project-info">
                 <div class="project-category">Re-Wiring</div>
-                <h4 class="project-title">DB Design and Cable Termination</h4>
-                <p class="project-description">Installed a 26 ways electrical distribution box to accomodate more loads.</p>
+                <h4 class="project-title">DB Dressing and Cable Termination</h4>
+                <p class="project-description">Installed a 13 ways electrical distribution box to accomodate more loads.</p>
                 <div class="project-meta">
                   <span class="location"><i class="bi bi-geo-alt"></i> Kabanana, Mpyala area, LSK</span>
                   <span class="timeline"><i class="bi bi-calendar"></i> 2 hours</span>
@@ -679,7 +679,7 @@
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
             <div class="project-card">
               <div class="project-image">
-                <img src="assets/img/construction/kh-2.jpg" alt="Project" class="img-fluid">
+                <img src="assets/img/construction/electrician-1.jpg" alt="Project" class="img-fluid">
                 <div class="project-overlay">
                   <div class="project-status completed">Completed</div>
                   <div class="project-actions">
@@ -688,11 +688,11 @@
                 </div>
               </div>
               <div class="project-info">
-                <div class="project-category">Tubing</div>
+                <div class="project-category">Tubing & Wiring</div>
                 <h4 class="project-title">25mm conduits layout</h4>
                 <p class="project-description">Conduit design and installations for a commecial building.</p>
                 <div class="project-meta">
-                  <span class="location"><i class="bi bi-geo-alt"></i> Kabanana, Mpyala area, LSK</span>
+                  <span class="location"><i class="bi bi-geo-alt"></i> Ngwerere, LSK</span>
                   <span class="timeline"><i class="bi bi-calendar"></i> 4 Weeks</span>
                 </div>
               </div>
@@ -1105,7 +1105,9 @@
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Preloader -->
-  <div id="preloader"></div>
+  <!--<div id="preloader"></div>-->
+  <div></div>
+
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -1301,7 +1303,7 @@
                         <div class="result-card">
                             <div class="result-label">Battery Storage Needed</div>
                             <div class="result-value" id="batteryWh"></div>
-                            <div class="result-unit">KWh</div>
+                            <div class="result-unit">KW</div>
                         </div>
                     </div>
                 </div>
@@ -1474,15 +1476,16 @@
       const energy_With_Losses = totalWh / system_loss;
       console.log(energy_With_Losses, "ENERGY WITH LOSSES ========");  
 
-      /* ====== SOLAR PANELS =================== */
+      /* ====== SIZING SOLAR PANELS =================== */
       const required_pv_power = energy_With_Losses / sunHours;
       console.log(required_pv_power, "REQUIRED PV POWER ========");
       const panels_in_theory = required_pv_power / PANEL_WATT; 
       console.log(panels_in_theory, "PANELS IN THEORY ========");
       const total_panels  = Math.ceil(panels_in_theory)
 
-      /* ============= SOLAR PANELS ============ */
+      /* =============  SIZING SOLAR PANELS ============ */
 
+      /* ============== BATTERY SIZING ================= */
       const BATTERY_VOLTAGE = 51.2;
       const batteryWh = BATTERY_VOLTAGE * BATTERY_AH * DOD; // Wh per battery
       const total_battery_capacity = energy_With_Losses * daysAutonomy; // Wh total
@@ -1490,11 +1493,11 @@
       let batteriesChosen = Math.ceil(batteriesTheory);
 
 
-      /*  ============== BATTERY CAPACITY*/
+      /*  ============== BATTERY SIZING ================== */
       system_voltage = BATTERY_VOLTAGE;
       const battery_capacity = 0;
 
-      /* ===== INVERTER ===== */
+      /* ===== INVERTER SIZING ===== */
       const inverterSizeKVA = Math.ceil((peakPower / 0.8) / 1000);
 
       /* ----- Recommended Solar System*/
@@ -1514,10 +1517,7 @@
           inverterSizeKVA + " kVA";
 
 
-      const whatsappMsg = `
-      Hello VoltaElectrical,
-
-      I used your Solar Calculator and would like a professional quote
+      const whatsappMsg = `Hello Volta Electrical, I used your Solar Calculator and would like a professional quote
 
       Daily Energy Usage is: ${(totalWh / 1000).toFixed(2)} kWh
       Solar Panels Required: ${total_panels} × ${PANEL_WATT}W
@@ -1525,8 +1525,7 @@
       Backup Duration: ${daysAutonomy} days
       Inverter Size: ${inverterSizeKVA} kVA
 
-      Please advise on the system pricing and installation.
-      `.trim();
+      Please advise on the system pricing and installation.`;
 
       document.getElementById('whatsapp-link').href =
         `https://wa.me/260978195399?text=${encodeURIComponent(whatsappMsg)}`;
