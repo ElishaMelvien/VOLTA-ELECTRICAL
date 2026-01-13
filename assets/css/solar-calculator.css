@@ -27,23 +27,27 @@
 
 /* .result-card {
     background: #f8f9fa;
-    border: 1px solid #dee2e6;
-    border-radius: 8px;
-    padding: 15px;
+    border: 1.5px solid #e6e5de;
+    border-radius: 16px;
+    padding: 20px;
     text-align: center;
     border-color:#ff7b00;
+    
 } */
 
-.result-card {
+/* .result-card {
   background: #ffffff;
   border-radius: 16px;
   padding: 20px;
   position: relative;
   box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-}
+} */
+
+
+
 
 /* Authority accent line */
-.result-card::before {
+/* .result-card::before {
   content: "";
   position: absolute;
   top: 0;
@@ -52,14 +56,15 @@
   width: 100%;
   background: var(--brand-orange);
   border-radius: 16px 16px 0 0;
-}
+  border-color:#ff7b00;
+} */
 
 
-.result-label {
+/* .result-label {
     font-size: 0.85rem;
     color: #6c757d;
     margin-bottom: 5px;
-}
+} */
 
 /* .result-value {
     font-size: 1.8rem;
@@ -73,7 +78,72 @@
     color: #342c26;
 } */
 
-.result-label {
+/* .result-label {
+  font-size: 0.8rem;
+  color: var(--brand-gray);
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+} */
+
+/* .result-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--brand-black);
+} */
+
+/* .result-unit {
+  font-size: 0.9rem;
+  color: var(--brand-gray);
+} */
+
+
+
+/* ===============================
+   PREMIUM RESULT CARD GLOW
+   =============================== */
+
+.result-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 22px;
+  text-align: center;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Animated glowing border */
+.result-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 20px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #FFA500,
+    #ffcc80,
+    #FFA500,
+    transparent
+  );
+  background-size: 300% 100%;
+  animation: glow-move 30s linear infinite;
+  z-index: -2;
+}
+
+/* Inner layer to keep content clean */
+.result-card::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: #ffffff;
+  border-radius: 16px;
+  z-index: -1;
+}
+
+/* Authority accent bar */
+.result-card .result-label {
   font-size: 0.8rem;
   color: var(--brand-gray);
   letter-spacing: 0.4px;
@@ -84,6 +154,7 @@
   font-size: 2rem;
   font-weight: 800;
   color: var(--brand-black);
+  margin: 6px 0;
 }
 
 .result-unit {
@@ -91,6 +162,33 @@
   color: var(--brand-gray);
 }
 
+/* Hover = stronger authority */
+.result-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(255, 165, 0, 0.25);
+}
+
+/* Glow animation */
+@keyframes glow-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 300% 50%;
+  }
+}
+
+/* Mobile refinement */
+@media (max-width: 576px) {
+  .result-card {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .result-value {
+    font-size: 1.6rem;
+  }
+}
 
 /* Settings Grid */
 .settings-grid {

@@ -20,6 +20,7 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
@@ -70,7 +71,7 @@
     <div class="container-fluid container-xl position-relative d-flex align-items-center">
       <a href="index.html" class="logo d-flex align-items-center me-auto">
         <img src="assets/img/logo.png" alt="voltaelectrical_logo" class="logo-img">
-        <h1 class="sitename">VoltaElectrical</h1>
+        <h1 class="sitename"></h1>
       </a>
       <nav id="navmenu" class="navmenu">
         <ul>
@@ -366,11 +367,11 @@
               <div class="service-icon">
                 <i class="bi bi-tools"></i>
               </div>
-              <h3>Combiner Box Wiring</h3>
+              <h3>House Earthing Testing Solution</h3>
               <p>
                 installation includes a lightning surge protection Module and a double pole circuit breaker for overcurrent protection.
               </p>
-              <img src="assets/img/construction/2-in-1 combiner box.webp" alt="geyser" class="img-fluid">
+              <img src="assets/img/construction/earthing-solution.jpg" alt="geyser" class="img-fluid">
               <a href="services.html"  class="service-cta">
                 <span>Explore service</span>
                 <i class="bi bi-arrow-right"></i>
@@ -447,7 +448,7 @@
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <div class="project-card">
               <div class="project-image">
-                <img src="assets/img/construction/tubing-1.jpg" alt="Project" class="img-fluid">
+                <img src="assets/img/construction/final-distribution board.jpg" alt="Project" class="img-fluid">
                 <div class="project-overlay">
                   <div class="project-status completed">Completed</div>
                   <div class="project-actions">
@@ -458,7 +459,7 @@
               <div class="project-info">
                 <div class="project-category">Domestic</div>
                 <h4 class="project-title">Residential Wiring Project</h4>
-                <p class="project-description">Full 2 bedroom house wiring  for a family home in 13 Miles, Lusaka.</p>
+                <p class="project-description">Full 2 bedroom house wiring in 13 Miles.</p>
                 <div class="project-meta">
                   <span class="location"><i class="bi bi-geo-alt"></i>13 Miles, LSK</span>
                   <span class="timeline"><i class="bi bi-calendar"></i>2 Weeks</span>
@@ -655,7 +656,7 @@
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
             <div class="project-card">
               <div class="project-image">
-                <img src="assets/img/construction/tubing-a.jpg" alt="Project" class="img-fluid">
+                <img src="assets/img/construction/tubing-2.jpg" alt="Project" class="img-fluid">
                 <div class="project-overlay">
                   <div class="project-status completed">Completed</div>
                   <div class="project-actions">
@@ -1469,7 +1470,7 @@
      
       const PANEL_WATT = 550;
       const BATTERY_AH = 200;
-      const DOD = 0.8;
+      // const DOD = 0.8;
       // const SUN_HOURS = 5;
 
       /* ===== ENERGY WITH LOSSES ===== */
@@ -1486,16 +1487,32 @@
       /* =============  SIZING SOLAR PANELS ============ */
 
       /* ============== BATTERY SIZING ================= */
-      const BATTERY_VOLTAGE = 51.2;
-      const batteryWh = BATTERY_VOLTAGE * BATTERY_AH * DOD; // Wh per battery
-      const total_battery_capacity = energy_With_Losses * daysAutonomy; // Wh total
-      let batteriesTheory = total_battery_capacity / batteryWh;
-      let batteriesChosen = Math.ceil(batteriesTheory);
+      // const BATTERY_VOLTAGE = 51.2;
+      // const batteryWh = BATTERY_VOLTAGE * BATTERY_AH * DOD; // Wh per battery
+      // const total_battery_capacity = energy_With_Losses * daysAutonomy; // Wh total
+      // let batteriesTheory = total_battery_capacity / batteryWh;
+      // let batteriesChosen = Math.ceil(batteriesTheory);
+
+      /* ============== BATTERY SIZING ================= */
+      const BATTERY_EFFICIENCY = 0.85;
+      const DOD = 0.8;
+      const BATTERY_VOLTAGE = 48;
+
+      // Convert daily energy to kWh
+      const totalKWh = totalWh;
+      console.log("TOTAL KWH ========", totalKWh);
+
+      // Battery Capacity in Ah = (Total KWh * Days of Autonomy) / (Battery Efficiency * DoD * Battery Voltage)
+      const batteryCapacityAh = (totalKWh * daysAutonomy) / (BATTERY_EFFICIENCY * DOD * BATTERY_VOLTAGE);
+      console.log("BATTERY CAPACITY Ah ========", batteryCapacityAh);
+      const batteriesChosen = Math.ceil(batteryCapacityAh);
+      console.log(batteriesChosen, "BATTERIES CHOSEN ========");
 
 
-      /*  ============== BATTERY SIZING ================== */
-      system_voltage = BATTERY_VOLTAGE;
-      const battery_capacity = 0;
+
+        /*  ============== BATTERY SIZING ================== */
+        system_voltage = BATTERY_VOLTAGE;
+        const battery_capacity = 0;
 
       /* ===== INVERTER SIZING ===== */
       const inverterSizeKVA = Math.ceil((peakPower / 0.8) / 1000);

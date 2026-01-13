@@ -305,3 +305,63 @@ document.querySelectorAll('.system-card').forEach(card => {
     displayDiv.classList.add('show');
   });
 });
+
+
+
+
+// ============ contact forM SMTP ====================
+
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+  e.preventDefault(); // prevent normal form submission
+
+  const loading = this.querySelector('.loading');
+  const errorMsg = this.querySelector('.error-message');
+  const sentMsg = this.querySelector('.sent-message');
+
+  loading.style.display = 'block';
+  errorMsg.textContent = '';
+  sentMsg.style.display = 'none';
+
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const subject = document.getElementById('subject').value.trim();
+  const message = document.getElementById('message').value.trim();
+
+  // Construct the API body
+  const body = {
+    subject: subject,
+    from: "info.voltaelectrical.zm@gmail.com", // your sending email
+    to: ["info.voltaelectrical.zm@gmail.com"], // recipient(s)
+    smtp_server: "smtp.gmail.com",
+    smtp_port: "587",
+    smtp_username: "info.voltaelectrical.zm@gmail.com",
+    smtp_password: "YOUR_APP_PASSWORD_HERE", // Gmail App Password
+    body: `<p><strong>Name:</strong> ${name}</p>
+           <p><strong>Email:</strong> ${email}</p>
+           <p><strong>Message:</strong> ${message}</p>`
+  };
+
+  try {
+    const response = await fetch('https://loan-schedule-api.rains.toolzm.com/api/send/bulk/mails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+
+    const result = await response.json();
+    loading.style.display = 'none';
+
+    if (response.ok) {
+      sentMsg.style.display = 'block';
+      this.reset(); // clear the form
+    } else {
+      errorMsg.textContent = result.message || 'Something went wrong. Please try again.';
+    }
+  } catch (error) {
+    loading.style.display = 'none';
+    errorMsg.textContent = 'Error sending email: ' + error.message;
+  }
+});
+
