@@ -277,7 +277,7 @@
           <div class="service-item" data-aos="fade-up" data-aos-delay="200">
             <div class="service-number">02</div>
             <div class="service-icon">
-              <i class="bi bi-house-heart"></i>
+              <i class="bi bi-plug"></i>
             </div>
             <h3>House Wiring</h3>
             <p>
@@ -362,7 +362,7 @@
             <div class="service-item" data-aos="fade-up" data-aos-delay="400">
               <div class="service-number">07</div>
               <div class="service-icon">
-                <i class="bi bi-tools"></i>
+                <i class="bi bi-lightning-fill"></i>
               </div>
               <h3>House Earthing Testing Solution</h3>
               <p>
@@ -379,13 +379,13 @@
             <div class="service-item" data-aos="fade-up" data-aos-delay="400">
               <div class="service-number">07</div>
               <div class="service-icon">
-                <i class="bi bi-tools"></i>
+                <i class="bi bi-brush"></i>
               </div>
-              <h3>Indoor Light Installation</h3></h3>
+              <h3>Solar Panels Cleaning</h3>
               <p>
-                 Safe and professional installation of indoor lighting fixtures to enhance your room’s ambience and visibility.
+                 Solar Panels Cleaning Services to maximize efficiency and longevity of your solar investment.
               </p>
-              <img src="assets/img/construction/lighting-2.jpg" alt="geyser" class="img-fluid">
+              <img src="assets/img/construction/solar panel cleaning.jpg" alt="Solar Panels Cleaning Services to maximize efficiency" class="img-fluid">
               <a href="services.html"  class="service-cta">
                 <span>Explore service</span>
                 <i class="bi bi-arrow-right"></i>
@@ -1208,7 +1208,7 @@
                 
                 <hr>
 
-                <h4><i class="bi bi-plus-circle-dotted" style="color:#ff7b00;"></i> Add Custom Appliance</h4>
+                <!--<h4><i class="bi bi-plus-circle-dotted" style="color:#ff7b00;"></i> Add Custom Appliance</h4>
                 <div class="row g-3 mb-4">
                     <div class="col-md-3">
                         <label class="form-label">Appliance Name</label>
@@ -1223,13 +1223,55 @@
                         <input type="number" id="customQty" class="form-control" placeholder="Enter quantity e.g 1">
                     </div>
                     <div class="col-md-2">
-                        <label class="form-label">Hours per Day</label>
+                        <label class="form-label">Hours of Usage/day</label>
                         <input type="number" step="0.5" id="customHours" class="form-control" placeholder="Enter hours used per day e.g. 5">
                     </div>
                     <div class="col-md-3 d-flex align-items-end">
                         <button class="btn btn-primary" style="background-color:#ff7b00; border: none;" onclick="addCustomAppliance()">Add Appliance</button>
                     </div>
+                </div>-->
+
+              <h4><i class="bi bi-plus-circle-dotted" style="color:#ff7b00;"></i>Add Custom Appliance</h4>
+              <div class="row g-3 mb-4">
+                <div class="col-md-3">
+                  <label class="form-label">Appliance Name</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-houses" style="color:#007bff;"></i></span>
+                    <input type="text" id="customName" class="form-control" placeholder="Laptop, Water Pump">
+                  </div>
                 </div>
+
+                <div class="col-md-2">
+                  <label class="form-label">Power (Watts)</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-lightning-fill" style="color:#ffc107;"></i></span>
+                    <input type="number" id="customWatt" class="form-control" placeholder="Enter power">
+                  </div>
+                </div>
+
+                <div class="col-md-2">
+                  <label class="form-label">Quantity</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-hash" style="color:#22b143;"></i></span>
+                    <input type="number" id="customQty" class="form-control" placeholder="Quantity">
+                  </div>
+                </div>
+
+                <div class="col-md-2">
+                  <label class="form-label">Hours of Usage/day</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-clock" style="color:#14bbd5;"></i></span>
+                    <input type="number" step="0.5" id="customHours" class="form-control" placeholder="Enter hours">
+                  </div>
+                </div>
+
+                <div class="col-md-3 d-flex align-items-end">
+                  <button class="btn btn-primary" style="background-color:#ff7b00; border: none;" onclick="addCustomAppliance()">
+                    Add Appliance
+                  </button>
+                </div>
+
+              </div>
 
                 <hr>
 
@@ -1454,62 +1496,62 @@
           peakPower += a.watt * a.qty;
       });
 
-      /* ============== SYSTEM CONFIGURATION =============== */
+      // ============== SYSTEM CONFIGURATION
       const batteryVoltage = Number(document.getElementById('batteryVoltage').value);
       const daysAutonomy   = Number(document.getElementById('daysAutonomy').value);
       const sunHours       = Number(document.getElementById('sunHours').value);
       
-      /* ===== FIXED DC AND AC LOSSES ===== */
+      // ============== SYSTEM LOSSES
       const dc_loss = 0.94;   // 6% DC loss
       const ac_loss = 0.90;   // 10% AC loss
-      const system_loss = dc_loss * ac_loss; // ≈ 0.846
+      const system_losses = dc_loss * ac_loss;
 
-     
-      const PANEL_WATT = 550;
-      const BATTERY_AH = 200;
-      // const DOD = 0.8;
-      // const SUN_HOURS = 5;
 
-      /* ===== ENERGY WITH LOSSES ===== */
-      const energy_With_Losses = totalWh / system_loss;
-      console.log(energy_With_Losses, "ENERGY WITH LOSSES ========");  
+      // Daily energy in kWh including losses
+      const total_daily_energy_consumption = totalWh / system_losses;
+      console.log(total_daily_energy_consumption, "ENERGY WITH LOSSES ========");  
 
       /* ====== SIZING SOLAR PANELS =================== */
-      const required_pv_power = energy_With_Losses / sunHours;
-      console.log(required_pv_power, "REQUIRED PV POWER ========");
-      const panels_in_theory = required_pv_power / PANEL_WATT; 
+      const PANEL_WATT = 550;
+      const required_solar_panel_capacity = total_daily_energy_consumption / sunHours;
+      console.log(required_solar_panel_capacity, "REQUIRED PV POWER ========");
+      const panels_in_theory = required_solar_panel_capacity / PANEL_WATT; 
       console.log(panels_in_theory, "PANELS IN THEORY ========");
       const total_panels  = Math.ceil(panels_in_theory)
 
-      /* =============  SIZING SOLAR PANELS ============ */
+      /* -------------------- SIZING SOLAR PANELS */
 
-      /* ============== BATTERY SIZING ================= */
-      // const BATTERY_VOLTAGE = 51.2;
-      // const batteryWh = BATTERY_VOLTAGE * BATTERY_AH * DOD; // Wh per battery
-      // const total_battery_capacity = energy_With_Losses * daysAutonomy; // Wh total
-      // let batteriesTheory = total_battery_capacity / batteryWh;
-      // let batteriesChosen = Math.ceil(batteriesTheory);
+      
 
-      /* ============== BATTERY SIZING ================= */
-      const BATTERY_EFFICIENCY = 0.85;
-      const DOD = 0.8;
-      const BATTERY_VOLTAGE = 48;
+      /* ============== BATTERY SIZING (PROFESSIONAL) ================= */
 
-      // Convert daily energy to kWh
-      const totalKWh = totalWh;
-      console.log("TOTAL KWH ========", totalKWh);
+      // Installer assumptions (LSC standard)
+      const BATTERY_EFFICIENCY = 0.85;   // 85%
+      const DOD = 0.80;                 // 80% usable
+      const BATTERY_AH = 200;           // Battery rating
 
-      // Battery Capacity in Ah = (Total KWh * Days of Autonomy) / (Battery Efficiency * DoD * Battery Voltage)
-      const batteryCapacityAh = (totalKWh * daysAutonomy) / (BATTERY_EFFICIENCY * DOD * BATTERY_VOLTAGE);
-      console.log("BATTERY CAPACITY Ah ========", batteryCapacityAh);
-      const batteriesChosen = Math.ceil(batteryCapacityAh);
-      console.log(batteriesChosen, "BATTERIES CHOSEN ========");
+      // Use selected system voltage
+      const BATTERY_VOLTAGE = batteryVoltage;
+
+      // Energy required for backup (Wh)
+      const backupEnergyWh = totalWh * daysAutonomy;
+
+      // Adjust for losses
+      const requiredBatteryEnergyWh =
+        backupEnergyWh / (BATTERY_EFFICIENCY * DOD);
+
+      // One battery capacity (Wh)
+      // Power = V x I, AH is just current in disguise
+      const singleBatteryWh = BATTERY_VOLTAGE * BATTERY_AH;
+
+      // Number of batteries required
+      const batteriesChosen = Math.ceil(
+        requiredBatteryEnergyWh / singleBatteryWh
+      );
 
 
-
-        /*  ============== BATTERY SIZING ================== */
-        system_voltage = BATTERY_VOLTAGE;
-        const battery_capacity = 0;
+      system_voltage = BATTERY_VOLTAGE;
+      const battery_capacity = 0;
 
       /* ===== INVERTER SIZING ===== */
       const inverterSizeKVA = Math.ceil((peakPower / 0.8) / 1000);
@@ -1519,13 +1561,14 @@
           (totalWh / 1000).toFixed(2) + " kWh/day"
 
       document.getElementById('panelSize').textContent =
-          Math.round(required_pv_power) + " W";
+          Math.round(required_solar_panel_capacity) + " W";
 
       document.getElementById('solarPanels').textContent =
           `${total_panels} × ${PANEL_WATT}W `;
 
       document.getElementById('batteryWh').textContent =
-          `${batteriesChosen} × ${batteryVoltage}V  ${BATTERY_AH}Ah`;
+          `${batteriesChosen} × ${BATTERY_VOLTAGE}V ${BATTERY_AH}Ah`;
+
 
       document.getElementById('inverterSize').textContent =
           inverterSizeKVA + " kVA";
