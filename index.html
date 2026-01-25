@@ -1411,7 +1411,9 @@
               const qty = parseInt(this.dataset.qty || 1);
               const hours = parseFloat(this.dataset.hours);
 
-              appliances.push({ name, watt, qty, hours });
+              const isMotor = isMotorLoad(name);
+              // appliances.push({ name, watt, qty, hours });
+              appliances.push({ name, watt, qty, hours, isMotor });
               renderAppliances();
               scrollToResults();
           });
@@ -1424,12 +1426,14 @@
       const qty = parseInt(document.getElementById('customQty').value);
       const hours = parseFloat(document.getElementById('customHours').value);
 
+      const isMotor = isMotorLoad(name);
+
       if (!name || !watt || !qty || !hours) {
           alert("Please fill all fields");
           return;
       }
 
-      appliances.push({ name, watt, qty, hours });
+      appliances.push({ name, watt, qty, hours, isMotor });
 
       document.getElementById('customName').value = "";
       document.getElementById('customWatt').value = "";
@@ -1488,13 +1492,26 @@
   }
 
   function calculate() {
+      // let totalWh = 0;
+      // let peakPower = 0;
+
+      // appliances.forEach(a => {
+      //     totalWh += a.watt * a.qty * a.hours;
+      //     peakPower += a.watt * a.qty;
+      // });
+
       let totalWh = 0;
       let peakPower = 0;
 
       appliances.forEach(a => {
-          totalWh += a.watt * a.qty * a.hours;
-          peakPower += a.watt * a.qty;
-      });
+        totalWh += a.watt * a.qty * a.hours;
+
+        // Inverter sizing (apply surge)
+        const runningPower = a.watt * a.qty;
+        const surgePower = a.isMotor ? runningPower * 3 : runningPower;
+
+        peakPower += surgePower;
+        });
 
       // ============== SYSTEM CONFIGURATION
       const batteryVoltage = Number(document.getElementById('batteryVoltage').value);
@@ -1603,6 +1620,31 @@
       behavior: "smooth"
     });
   }
+
+  // in-rush current 
+  function isMotorLoad(applianceName) {
+  if (!applianceName) return false;
+
+  const motorKeywords = [
+    "fridge",
+    "refrigerator",
+    "freezer",
+    "deep freezer",
+    "pump",
+    "compressor",
+    "washing machine",
+    "washer",
+    "borehole",
+    "air conditioner",
+    "ac",
+    "motor",
+    "water pump"
+  ];
+
+  const name = applianceName.toLowerCase();
+
+  return motorKeywords.some(keyword => name.includes(keyword));
+}
 
 </script>
 </body>
