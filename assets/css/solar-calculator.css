@@ -314,6 +314,18 @@
   }
 }
 
+.text-orange {
+  color: #ff7b00 !important; /* matches your theme */
+}
+
+/* .table-footer-total {
+  background: linear-gradient(
+    90deg,
+    rgba(220, 53, 69, 0.08),
+    rgba(25, 135, 84, 0.08)
+  );
+} */
+
 
   
 

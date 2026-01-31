@@ -607,7 +607,7 @@
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
             <div class="project-card">
               <div class="project-image">
-                <img src="assets/img/construction/solar-installation.jpg" alt="Project" class="img-fluid">
+                <img src="assets/img/construction/chainda solar installation.jpg" alt="Project" class="img-fluid">
                 <div class="project-overlay">
                   <div class="project-status completed">Completed</div>
                   <div class="project-actions">
@@ -616,11 +616,11 @@
                 </div>
               </div>
               <div class="project-info">
-                <div class="project-category">10KVA Solar System Installation</div>
-                <h4 class="project-title">10KVA Solar System Installation</h4>
-                <p class="project-description">Installed a 10KVA solar system that can power, Lights, TV, Music system, 1.7HP borehole Pump, solar pressing Iron and sockets</p>
+                <div class="project-category">8KVA Solar System Installation</div>
+                <h4 class="project-title">8KVA Solar System Installation</h4>
+                <p class="project-description">Installed a 8KVA solar system that can power, Lights, TV, Music system, 1.7HP borehole Pump and sockets</p>
                 <div class="project-meta">
-                  <span class="location"><i class="bi bi-geo-alt"></i> Olympia, LSK</span>
+                  <span class="location"><i class="bi bi-geo-alt"></i>Chainda, LSK</span>
                   <span class="timeline"><i class="bi bi-calendar"></i> 2 days</span>
                 </div>
               </div>
@@ -1291,14 +1291,34 @@
                         <tbody id="applianceList">
                             <tr><td colspan="6" class="text-center text-muted">No appliances added yet. Use 'Add Appliance' above!</td></tr>
                         </tbody>
-                        <tfoot>
+                        <!--<tfoot>
 
                           <tr class="table-footer-total">
                             <td colspan="4" class="text-end">TOTAL ENERGY</td>
                             <td id="tableTotalWh">0</td>
                             <td></td>
                           </tr>
-                        </tfoot>
+                        </tfoot>-->
+                      <tfoot>
+                        <tr class="table-footer-total">
+                          <!-- PEAK DEMAND -->
+                            <td colspan="2" class="text-end fw-bold text-orange">
+                              <i class="bi bi-lightning-charge-fill"></i> PEAK DEMAND
+                            </td>
+                            <td id="tablePeakPower" class="fw-bold text-orange">
+                              0 W
+                            </td>
+
+                            <!-- TOTAL ENERGY -->
+                            <td class="text-end fw-bold text-success">
+                              <i class="bi bi-battery-charging"></i> TOTAL ENERGY
+                            </td>
+                            <td id="tableTotalWh" class="fw-bold text-black">
+                              0 Wh/day
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
 
                     </table>
                     <p class="text-muted small mt-0">
@@ -1449,44 +1469,94 @@
       renderAppliances();
   }
 
-  function renderAppliances() {
+  // function renderAppliances() {
+  //     const list = document.getElementById('applianceList');
+  //     const totalCell = document.getElementById('tableTotalWh');
+
+  //     if (appliances.length === 0) {
+  //         list.innerHTML = `
+  //           <tr>
+  //             <td colspan="6" class="text-center text-muted">
+  //               No appliances added yet. Use 'Quick Add' above!
+  //             </td>
+  //           </tr>`;
+  //         totalCell.textContent = "0";
+  //         calculate();
+  //         return;
+  //     }
+
+  //     let totalWh = 0;
+
+  //     list.innerHTML = appliances.map((a, i) => {
+  //         const rowWh = a.watt * a.qty * a.hours;
+  //         totalWh += rowWh;
+
+  //         return `
+  //           <tr>
+  //             <td>${a.name}</td>
+  //             <td>${a.watt}</td>
+  //             <td>${a.qty}</td>
+  //             <td>${a.hours}</td>
+  //             <td>${rowWh.toFixed(1)}</td>
+  //             <td>
+  //               <button class="btn btn-danger btn-sm" onclick="removeAppliance(${i})">
+  //                 Remove
+  //               </button>
+  //             </td>
+  //           </tr>`;
+  //     }).join("");
+
+  //     totalCell.textContent = `${Math.round(totalWh)} Wh/day`;
+
+  //     calculate();
+  // }
+
+    function renderAppliances() {
       const list = document.getElementById('applianceList');
       const totalCell = document.getElementById('tableTotalWh');
+      const peakCell  = document.getElementById('tablePeakPower');
 
       if (appliances.length === 0) {
-          list.innerHTML = `
-            <tr>
-              <td colspan="6" class="text-center text-muted">
-                No appliances added yet. Use 'Quick Add' above!
-              </td>
-            </tr>`;
-          totalCell.textContent = "0";
-          calculate();
-          return;
+        list.innerHTML = `
+          <tr>
+            <td colspan="6" class="text-center text-muted">
+              No appliances added yet. Use 'Quick Add' above!
+            </td>
+          </tr>`;
+        totalCell.textContent = "0 Wh/day";
+        peakCell.textContent  = "0 W";
+        calculate();
+        return;
       }
 
       let totalWh = 0;
+      let peakPower = 0;
 
       list.innerHTML = appliances.map((a, i) => {
-          const rowWh = a.watt * a.qty * a.hours;
-          totalWh += rowWh;
+        const rowWh = a.watt * a.qty * a.hours;
+        totalWh += rowWh;
 
-          return `
-            <tr>
-              <td>${a.name}</td>
-              <td>${a.watt}</td>
-              <td>${a.qty}</td>
-              <td>${a.hours}</td>
-              <td>${rowWh.toFixed(1)}</td>
-              <td>
-                <button class="btn btn-danger btn-sm" onclick="removeAppliance(${i})">
-                  Remove
-                </button>
-              </td>
-            </tr>`;
+        const runningPower = a.watt * a.qty;
+        const surgePower = a.isMotor ? runningPower * 3 : runningPower;
+        peakPower += surgePower;
+
+        return `
+          <tr>
+            <td>${a.name}</td>
+            <td>${a.watt}</td>
+            <td>${a.qty}</td>
+            <td>${a.hours}</td>
+            <td>${rowWh.toFixed(1)}</td>
+            <td>
+              <button class="btn btn-danger btn-sm" onclick="removeAppliance(${i})">
+                Remove
+              </button>
+            </td>
+          </tr>`;
       }).join("");
 
       totalCell.textContent = `${Math.round(totalWh)} Wh/day`;
+      peakCell.textContent  = `${Math.round(peakPower)} W`;
 
       calculate();
   }
@@ -1572,6 +1642,23 @@
 
       /* ===== INVERTER SIZING ===== */
       const inverterSizeKVA = Math.ceil((peakPower / 0.8) / 1000);
+
+      // ===================================
+      // PV Array to inveter MCB sizing
+      // Assume 40V per panel for Voc at STC
+      Voltage_of_one_PV_panel = 40  // Volts
+      Total_PV_voltage =  Voltage_of_one_PV_panel * total_panels  // Volts
+      Voltage = Total_PV_voltage
+      PV_Array_Current = required_solar_panel_capacity /Voltage //  I = P/V  in Amps
+      console.log(PV_Array_Current, "PV ARRAY CURRENT ========");
+      console.log(Total_PV_voltage, "TOTAL PV VOLTAGE IN SERIES ========");
+      // The total pv voltage assumes all panels are in series
+
+      // Battery bank to inverter MCB sizing
+      Battery_Bank_Current = (requiredBatteryEnergyWh / system_voltage) / 10 // C/10 rate in Amps
+      console.log(Battery_Bank_Current, "BATTERY BANK CURRENT ========");
+
+      // ===================================
 
       /* ----- Recommended Solar System*/
       document.getElementById('dailyEnergy').textContent =
